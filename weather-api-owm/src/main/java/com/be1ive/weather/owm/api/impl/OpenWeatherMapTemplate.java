@@ -39,8 +39,13 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     }
 
     @Override
-    public <T> List<T> fetchObjects(String objectName, Class<T> type, Map<String, String> queryParameters) {
-        JsonNode jsonNode = getRestTemplate().getForObject(OPEN_API_URL, JsonNode.class, queryParameters);
+    public <T> T fetchObject(String objectName, Class<T> type, Map<String, ?> queryParameters) {
+        return getRestTemplate().getForObject(OPEN_API_URL + "/" + objectName, type, queryParameters);
+    }
+
+    @Override
+    public <T> List<T> fetchObjects(String objectName, Class<T> type, Map<String, ?> queryParameters) {
+        JsonNode jsonNode = getRestTemplate().getForObject(OPEN_API_URL + "/" + objectName, JsonNode.class, queryParameters);
         return list(type, jsonNode);
     }
 
