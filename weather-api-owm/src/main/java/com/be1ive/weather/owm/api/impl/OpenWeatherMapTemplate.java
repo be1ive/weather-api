@@ -2,6 +2,7 @@ package com.be1ive.weather.owm.api.impl;
 
 import com.be1ive.weather.owm.api.CurrentWeatherOperations;
 import com.be1ive.weather.owm.api.OpenWeatherMap;
+import com.be1ive.weather.owm.api.ParametrisedList;
 import com.be1ive.weather.owm.api.impl.json.OpenWeatherMapModule;
 import com.be1ive.weather.AbstractApiConfigurations;
 import com.be1ive.weather.support.URIBuilder;
@@ -15,6 +16,8 @@ import org.springframework.util.MultiValueMap;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -48,18 +51,25 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     }
 
     @Override
-    public <T> List<T> fetchObjects(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters) {
+    public <T> ParametrisedList<T> fetchObjects(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters) {
         URI uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
         JsonNode jsonNode = getRestTemplate().getForObject(uri, JsonNode.class);
         return list(type, jsonNode);
     }
 
-    private <T> List<T> list(Class<T> type, JsonNode jsonNode) {
-        List<T> data = deserializeDataList(jsonNode.get("data"), type);
-        return new ArrayList<>(data);
+    private <T> ParametrisedList<T> list(Class<T> type, JsonNode jsonNode) {
+        List<T> list = deserializeList(jsonNode.get("list"), type);
+        Map<String, String> params = new HashMap<>();
+        for (Iterator<Map.Entry<String, JsonNode>> itr = jsonNode.fields(); itr.hasNext();) {
+            Map.Entry<String, JsonNode> entry = itr.next();
+            if (!entry.getKey().equals("list")) {
+                params.put(entry.getKey(), entry.getValue().asText());
+            }
+        }
+        return new ParametrisedList<T>(list, params);
     }
 
-    private <T> List<T> deserializeDataList(JsonNode jsonNode, final Class<T> elementType) {
+    private <T> List<T> deserializeList(JsonNode jsonNode, final Class<T> elementType) {
         try {
             CollectionType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, elementType);
             return (List<T>) objectMapper.reader(listType).readValue(jsonNode.toString());

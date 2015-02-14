@@ -16,6 +16,6 @@ public interface OpenWeatherMapApi {
 
     <T> T fetchObject(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters);
 
-    <T> List<T> fetchObjects(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters);
+    <T> ParametrisedList<T> fetchObjects(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters);
 
 }
