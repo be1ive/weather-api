@@ -8,5 +8,5 @@ public class CloudsInformation extends OpenWeatherObject {
     /**
      * Cloudiness, %
      */
-    private double all;
+    private Double all;
 }

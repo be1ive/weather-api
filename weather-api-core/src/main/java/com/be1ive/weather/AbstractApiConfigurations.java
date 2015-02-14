@@ -1,11 +1,14 @@
 package com.be1ive.weather;
 
+import com.be1ive.weather.auth.AuthTokenParameterRequestInterceptor;
 import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,15 +18,18 @@ public abstract class AbstractApiConfigurations implements ApiConfigurations {
 
     private final String accessToken;
 
+    private final String parameterName;
+
     private final RestTemplate restTemplate;
 
     public AbstractApiConfigurations() {
-        this(null);
+        this(null, null);
     }
 
-    public AbstractApiConfigurations(String accessToken) {
+    public AbstractApiConfigurations(String parameterName, String accessToken) {
+        this.parameterName = parameterName;
         this.accessToken = accessToken;
-        restTemplate = createRestTemplate();
+        this.restTemplate = createRestTemplate();
         configureRestTemplate(restTemplate);
     }
 
@@ -49,14 +55,14 @@ public abstract class AbstractApiConfigurations implements ApiConfigurations {
     }
 
     private RestTemplate createRestTemplate() {
-        RestTemplate template;
         List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
-        try {
-            template = new RestTemplate(messageConverters);
-        } catch (NoSuchMethodError e) {
-            template = new RestTemplate();
-            template.setMessageConverters(messageConverters);
-        }
+        RestTemplate template = new RestTemplate(messageConverters);
+
+        ClientHttpRequestInterceptor interceptor = new AuthTokenParameterRequestInterceptor(parameterName, accessToken);
+        List<ClientHttpRequestInterceptor> interceptors = new LinkedList<>();
+        interceptors.add(interceptor);
+        template.setInterceptors(interceptors);
+
         return template;
     }
 }

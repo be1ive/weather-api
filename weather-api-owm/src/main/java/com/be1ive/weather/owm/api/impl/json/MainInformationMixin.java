@@ -12,24 +12,24 @@ import java.util.Date;
 abstract class MainInformationMixin {
 
     @JsonProperty("temp")
-    double temp;
+    Double temp;
 
     @JsonProperty("humidity")
-    double humidity;
+    Double humidity;
 
     @JsonProperty("temp_min")
-    double tempMin;
+    Double tempMin;
 
     @JsonProperty("temp_max")
-    double tempMax;
+    Double tempMax;
 
     @JsonProperty("pressure")
-    double pressure;
+    Double pressure;
 
     @JsonProperty("sea_level")
-    double seaLevel;
+    Double seaLevel;
 
     @JsonProperty("grnd_level")
-    double grndLevel;
+    Double grndLevel;
 
 }

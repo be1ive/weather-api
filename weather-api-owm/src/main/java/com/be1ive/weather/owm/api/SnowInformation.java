@@ -8,6 +8,6 @@ public class SnowInformation extends OpenWeatherObject {
     /**
      * Snow volume for last 3 hours, mm
      */
-    private double volume;
+    private Double volume;
 
 }

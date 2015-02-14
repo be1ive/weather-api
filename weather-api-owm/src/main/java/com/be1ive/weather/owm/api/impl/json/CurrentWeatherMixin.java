@@ -18,7 +18,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -61,16 +65,24 @@ abstract class CurrentWeatherMixin extends OpenWeatherObjectMixin {
     @JsonProperty("snow")
     SnowInformation snow;
 
-    private static class WeatherConditionDeserializer extends JsonDeserializer<WeatherCondition> {
+    private static class WeatherConditionDeserializer extends JsonDeserializer<List<WeatherCondition>> {
         @Override
-        public WeatherCondition deserialize(JsonParser jsonParser, DeserializationContext ctxt)
+        public List<WeatherCondition> deserialize(JsonParser jsonParser, DeserializationContext ctxt)
                 throws IOException, JsonProcessingException {
             try {
                 ObjectCodec oc = jsonParser.getCodec();
                 JsonNode node = oc.readTree(jsonParser);
-                return WeatherCondition.forId(node.get("id").asText());
+                if (node != null) {
+                    List<WeatherCondition> list = new ArrayList<>();
+                    for (Iterator<JsonNode> itr = node.elements(); itr.hasNext(); ) {
+                        list.add(WeatherCondition.forId(itr.next().get("id").asText()));
+                    }
+                    return list;
+                } else {
+                    return Collections.EMPTY_LIST;
+                }
             } catch (IllegalArgumentException e) {
-                return WeatherCondition.OTHER;
+                return Collections.EMPTY_LIST;
             }
         }
     }

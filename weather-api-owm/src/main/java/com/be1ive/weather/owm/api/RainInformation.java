@@ -8,5 +8,5 @@ public class RainInformation extends OpenWeatherObject {
     /**
      * Precipitation volume for last 3 hours, mm
      */
-    private double volume;
+    private Double volume;
 }

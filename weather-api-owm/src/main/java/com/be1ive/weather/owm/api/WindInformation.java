@@ -8,15 +8,15 @@ public class WindInformation extends OpenWeatherObject {
     /**
      * Wind speed, mps
      */
-    private double speed;
+    private Double speed;
 
     /**
      * Wind direction, degrees (meteorological)
      */
-    private double deg;
+    private Double deg;
 
     /**
      * 	Wind gust, mps
      */
-    private double gust;
+    private Double gust;
 }

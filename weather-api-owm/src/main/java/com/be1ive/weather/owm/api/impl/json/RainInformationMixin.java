@@ -10,6 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 abstract class RainInformationMixin {
 
     @JsonProperty("3h")
-    double volume;
+    Double volume;
 
 }

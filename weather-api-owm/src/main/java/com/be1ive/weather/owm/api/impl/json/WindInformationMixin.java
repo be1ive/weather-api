@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 abstract class WindInformationMixin {
 
     @JsonProperty("speed")
-    double speed;
+    Double speed;
 
     @JsonProperty("deg")
-    double deg;
+    Double deg;
 
     @JsonProperty("gust")
-    double gust;
+    Double gust;
 
 }

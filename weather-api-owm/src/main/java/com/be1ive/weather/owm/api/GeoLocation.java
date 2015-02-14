@@ -8,14 +8,14 @@ public class GeoLocation extends OpenWeatherObject {
     /**
      * Location, latitude
      */
-    private double lat;
+    private Double lat;
 
     /**
      * Location, longitude
      */
-    private double lon;
+    private Double lon;
 
-    public GeoLocation(double lat, double lon) {
+    public GeoLocation(Double lat, Double lon) {
         this.lat = lat;
         this.lon = lon;
     }

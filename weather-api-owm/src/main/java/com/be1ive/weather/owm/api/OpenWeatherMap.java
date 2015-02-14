@@ -5,7 +5,7 @@ import com.be1ive.weather.ApiConfigurations;
 /**
  * Created by Nikolay on 14.02.2015.
  */
-public interface OpenWeatherMap extends OpenApi, ApiConfigurations {
+public interface OpenWeatherMap extends OpenWeatherMapApi, ApiConfigurations {
 
     CurrentWeatherOperations currentWeatherOperations();
 }

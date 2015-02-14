@@ -10,6 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 abstract class CloudsInformationMixin {
 
     @JsonProperty("all")
-    double all;
+    Double all;
 
 }

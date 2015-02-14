@@ -12,7 +12,7 @@ abstract class GeoLocationMixin extends OpenWeatherObjectMixin {
 
     @JsonCreator
     GeoLocationMixin(
-            @JsonProperty("lat") double lat,
-            @JsonProperty("lon") double lon) {}
+            @JsonProperty("lat") Double lat,
+            @JsonProperty("lon") Double lon) {}
 
 }

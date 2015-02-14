@@ -51,7 +51,7 @@ public class CurrentWeather extends OpenWeatherObject {
     /**
      * 	Weather Information
      */
-    private List<WeatherInformation> weather;
+    private List<WeatherCondition> weather;
 
     /**
      * 	Rain Information
