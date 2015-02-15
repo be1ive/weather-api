@@ -2,6 +2,7 @@ package com.be1ive.weather.owm.api.impl;
 
 import com.be1ive.weather.owm.api.CurrentWeatherOperations;
 import com.be1ive.weather.owm.api.OpenWeatherMap;
+import com.be1ive.weather.owm.api.OpenWeatherMapErrorHandler;
 import com.be1ive.weather.owm.api.ParametrisedList;
 import com.be1ive.weather.owm.api.impl.json.OpenWeatherMapModule;
 import com.be1ive.weather.AbstractApiConfigurations;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
@@ -85,6 +87,11 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
         objectMapper.registerModule(new OpenWeatherMapModule());
         converter.setObjectMapper(objectMapper);
         return converter;
+    }
+
+    @Override
+    protected void configureRestTemplate(RestTemplate restTemplate) {
+        restTemplate.setErrorHandler(new OpenWeatherMapErrorHandler());
     }
 
     private void initialize() {

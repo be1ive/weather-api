@@ -1,6 +1,5 @@
 package com.be1ive.weather.owm.api;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,59 +7,89 @@ import java.util.List;
  */
 public class CurrentWeather extends OpenWeatherObject {
 
-    /**
-     * 	City identification
-     */
-    private String id;
+    private CityObject city;
+
+    private SystemObject sys;
+
+    private MainObject main;
+
+    private WindObject wind;
+
+    private CloudsObject clouds;
+
+    private List<WeatherCondition> weather;
+
+    private RainObject rain;
+
+    private SnowObject snow;
 
     /**
-     * 	Data receiving time, unix time, GMT
+     * 	City Information
      */
-    private Date dt;
+    public CityObject getCity() {
+        return city;
+    }
 
     /**
-     * 	City name
+     * 	System Information
      */
-    private String name;
-
-    /**
-     * 	City Geo location
-     */
-    private GeoLocation coord;
-
-    /**
-     * 	System Geo location
-     */
-    private SystemInformation sys;
+    public SystemObject getSys() {
+        return sys;
+    }
 
     /**
      * 	Main Information
      */
-    private MainInformation main;
+    public MainObject getMain() {
+        return main;
+    }
 
     /**
      * 	Wind Information
      */
-    private WindInformation wind;
+    public WindObject getWind() {
+        return wind;
+    }
 
     /**
      * 	Clouds Information
      */
-    private CloudsInformation clouds;
+    public CloudsObject getClouds() {
+        return clouds;
+    }
 
     /**
      * 	Weather Information
      */
-    private List<WeatherCondition> weather;
+    public List<WeatherCondition> getWeather() {
+        return weather;
+    }
 
     /**
      * 	Rain Information
      */
-    private RainInformation rain;
+    public RainObject getRain() {
+        return rain;
+    }
 
     /**
      * 	Snow Information
      */
-    private SnowInformation snow;
+    public SnowObject getSnow() {
+        return snow;
+    }
 
+    @Override
+    public String toString() {
+        return "CurrentWeather{" +
+                "city=" + city +
+                ", sys=" + sys +
+                ", main=" + main +
+                ", wind=" + wind +
+                ", clouds=" + clouds +
+                ", weather=" + weather +
+                ", rain=" + rain +
+                ", snow=" + snow +
+                '}';
+    }
 }
