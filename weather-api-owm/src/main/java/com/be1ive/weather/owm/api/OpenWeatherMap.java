@@ -7,7 +7,7 @@ import com.be1ive.weather.ApiConfigurations;
  */
 public interface OpenWeatherMap extends OpenWeatherMapApi, ApiConfigurations {
 
-    CurrentWeatherOperations currentWeatherOperations();
+    CurrentConditionsOperations currentConditionsOperations();
 
-    ForecastWeatherOperations forecastWeatherOperations();
+    HourlyForecastOperations hourlyForecastOperations();
 }

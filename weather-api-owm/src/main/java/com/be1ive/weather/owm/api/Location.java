@@ -3,13 +3,13 @@ package com.be1ive.weather.owm.api;
 /**
  * Created by Nikolay on 14.02.2015.
  */
-public class LocationObject extends OpenWeatherObject {
+public class Location extends OpenWeatherMapObject {
 
     private final Double latitude;
 
     private final Double longitude;
 
-    public LocationObject(Double latitude, Double longitude) {
+    public Location(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }

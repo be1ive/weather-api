@@ -1,7 +1,7 @@
 package com.be1ive.weather.owm.api.impl;
 
-import com.be1ive.weather.owm.api.CurrentWeatherOperations;
-import com.be1ive.weather.owm.api.ForecastWeatherOperations;
+import com.be1ive.weather.owm.api.CurrentConditionsOperations;
+import com.be1ive.weather.owm.api.HourlyForecastOperations;
 import com.be1ive.weather.owm.api.OpenWeatherMap;
 import com.be1ive.weather.owm.api.OpenWeatherMapErrorHandler;
 import com.be1ive.weather.owm.api.ParametrisedList;
@@ -18,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,8 +28,8 @@ import java.util.Map;
  */
 public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements OpenWeatherMap {
 
-    private CurrentWeatherOperations currentWeatherOperations;
-    private ForecastWeatherOperations forecastWeatherOperations;
+    private CurrentConditionsOperations currentConditionsOperations;
+    private HourlyForecastOperations hourlyForecastOperations;
 
     private ObjectMapper objectMapper;
 
@@ -44,13 +43,13 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     }
 
     @Override
-    public CurrentWeatherOperations currentWeatherOperations() {
-        return currentWeatherOperations;
+    public CurrentConditionsOperations currentConditionsOperations() {
+        return currentConditionsOperations;
     }
 
     @Override
-    public ForecastWeatherOperations forecastWeatherOperations() {
-        return forecastWeatherOperations;
+    public HourlyForecastOperations hourlyForecastOperations() {
+        return hourlyForecastOperations;
     }
 
     @Override
@@ -106,7 +105,7 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     }
 
     private void initOperations() {
-        currentWeatherOperations = new CurrentWeatherOperationsTemplate(this, getRestTemplate());
-        forecastWeatherOperations = new ForecastWeatherOperationsTemplate(this, getRestTemplate());
+        currentConditionsOperations = new CurrentConditionsOperationsTemplate(this, getRestTemplate());
+        hourlyForecastOperations = new ForecastOperationsTemplate(this, getRestTemplate());
     }
 }

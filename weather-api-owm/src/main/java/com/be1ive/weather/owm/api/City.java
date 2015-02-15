@@ -3,18 +3,18 @@ package com.be1ive.weather.owm.api;
 /**
  * Created by Nikolay on 15.02.2015.
  */
-public class CityObject extends OpenWeatherObject {
+public class City extends OpenWeatherMapObject {
 
     private final String id;
     private final String name;
     private final String country;
-    private final LocationObject locationObject;
+    private final Location location;
 
-    public CityObject(String id, String name, String country, LocationObject locationObject) {
+    public City(String id, String name, String country, Location location) {
         this.id = id;
         this.name = name;
         this.country = country;
-        this.locationObject = locationObject;
+        this.location = location;
     }
 
     /**
@@ -41,8 +41,8 @@ public class CityObject extends OpenWeatherObject {
     /**
      * 	City Geo location
      */
-    public LocationObject getLocation() {
-        return locationObject;
+    public Location getLocation() {
+        return location;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CityObject extends OpenWeatherObject {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
-                ", location=" + locationObject +
+                ", location=" + location +
                 '}';
     }
 }

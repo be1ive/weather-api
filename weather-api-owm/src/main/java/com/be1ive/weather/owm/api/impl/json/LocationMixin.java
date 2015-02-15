@@ -8,10 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by Nikolay on 14.02.2015.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class SnowObjectMixin extends OpenWeatherObjectMixin {
+abstract class LocationMixin extends OpenWeatherMapObjectMixin {
 
     @JsonCreator
-    SnowObjectMixin(
-            @JsonProperty("3h") Double volume){}
+    LocationMixin(
+            @JsonProperty("lat") Double latitude,
+            @JsonProperty("lon") Double longitude) {}
 
 }

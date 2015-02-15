@@ -1,17 +1,12 @@
 package com.be1ive.weather.owm.api.impl.json;
 
-import com.be1ive.weather.owm.api.CityObject;
-import com.be1ive.weather.owm.api.CloudsObject;
+import com.be1ive.weather.owm.api.AbstractWeather;
+import com.be1ive.weather.owm.api.City;
+import com.be1ive.weather.owm.api.CurrentConditions;
+import com.be1ive.weather.owm.api.HourlyForecast;
+import com.be1ive.weather.owm.api.Location;
+import com.be1ive.weather.owm.api.OpenWeatherMapObject;
 import com.be1ive.weather.owm.api.CurrentWeather;
-import com.be1ive.weather.owm.api.ForecastWeather;
-import com.be1ive.weather.owm.api.LocationObject;
-import com.be1ive.weather.owm.api.MainObject;
-import com.be1ive.weather.owm.api.OpenWeatherObject;
-import com.be1ive.weather.owm.api.RainObject;
-import com.be1ive.weather.owm.api.SnowObject;
-import com.be1ive.weather.owm.api.SystemObject;
-import com.be1ive.weather.owm.api.WeatherObject;
-import com.be1ive.weather.owm.api.WindObject;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 /**
@@ -27,17 +22,23 @@ public class OpenWeatherMapModule extends SimpleModule {
 
     @Override
     public void setupModule(SetupContext context) {
-        context.setMixInAnnotations(CityObject.class, CityObjectMixin.class);
-        context.setMixInAnnotations(CloudsObject.class, CloudsObjectMixin.class);
+
+        context.setMixInAnnotations(OpenWeatherMapObject.class, OpenWeatherMapObjectMixin.class);
+
+        context.setMixInAnnotations(City.class, CityMixin.class);
+        context.setMixInAnnotations(Location.class, LocationMixin.class);
+
+        context.setMixInAnnotations(CurrentConditions.class, CurrentConditionsMixin.class);
+        context.setMixInAnnotations(HourlyForecast.class, HourlyForecastMixin.class);
+
+        context.setMixInAnnotations(AbstractWeather.class, AbstractWeatherMixin.class);
+
         context.setMixInAnnotations(CurrentWeather.class, CurrentWeatherMixin.class);
-        context.setMixInAnnotations(ForecastWeather.class, ForecastWeatherMixin.class);
-        context.setMixInAnnotations(LocationObject.class, LocationObjectMixin.class);
-        context.setMixInAnnotations(MainObject.class, MainObjectMixin.class);
-        context.setMixInAnnotations(OpenWeatherObject.class, OpenWeatherObjectMixin.class);
-        context.setMixInAnnotations(RainObject.class, RainObjectMixin.class);
-        context.setMixInAnnotations(SnowObject.class, SnowObjectMixin.class);
-        context.setMixInAnnotations(SystemObject.class, SystemObjectMixin.class);
-        context.setMixInAnnotations(WeatherObject.class, WeatherObjectMixin.class);
-        context.setMixInAnnotations(WindObject.class, WindObjectMixin.class);
+        context.setMixInAnnotations(CurrentWeather.MainObject.class, CurrentWeatherMixin.MainObjectMixin.class);
+        context.setMixInAnnotations(CurrentWeather.CloudsObject.class, CurrentWeatherMixin.CloudsObjectMixin.class);
+        context.setMixInAnnotations(CurrentWeather.RainObject.class, CurrentWeatherMixin.RainObjectMixin.class);
+        context.setMixInAnnotations(CurrentWeather.SnowObject.class, CurrentConditionsMixin.SnowObjectMixin.class);
+        context.setMixInAnnotations(CurrentWeather.SystemObject.class, CurrentWeatherMixin.SystemObjectMixin.class);
+        context.setMixInAnnotations(CurrentWeather.WindObject.class, CurrentWeatherMixin.WindObjectMixin.class);
     }
 }

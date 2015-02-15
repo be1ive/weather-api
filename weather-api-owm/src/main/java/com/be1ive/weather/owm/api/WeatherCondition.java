@@ -37,7 +37,7 @@ public enum WeatherCondition {
     RAIN_SHOWER_HEAVY_INTENSITY (Group.RAIN, "522", "heavy intensity shower rain", "09d.png"),
     RAIN_SHOWER_RAGGED (Group.RAIN, "531", "ragged shower rain", "09d.png"),
 
-    SNOW_light (Group.SNOW, "600", "light snow", "13d.png"),
+    SNOW_LIGHT (Group.SNOW, "600", "light snow", "13d.png"),
     SNOW (Group.SNOW, "601", "snow", "13d.png"),
     SNOW_HEAVY (Group.SNOW, "602", "heavy snow", "13d.png"),
     SNOW_SLEET (Group.SNOW, "611", "sleet", "13d.png"),
