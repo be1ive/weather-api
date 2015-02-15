@@ -6,14 +6,14 @@ Currently supported rest-apis:
  
 # Download Artifacts
 
-    <parent>
+    <dependency>
         <groupId>com.be1ive.weather</groupId>
         <artifactId>weather-api-core</artifactId>
         <version>{com.be1ive.weather.version}</version>
-    </parent>
+    </dependency>
     
-    <parent>
+    <dependency>
         <groupId>com.be1ive.weather</groupId>
         <artifactId>weather-api-owm</artifactId>
         <version>{com.be1ive.weather.version}</version>
-    </parent>
+    </dependency>
