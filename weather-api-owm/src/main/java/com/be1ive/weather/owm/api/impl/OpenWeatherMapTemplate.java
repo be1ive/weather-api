@@ -1,6 +1,7 @@
 package com.be1ive.weather.owm.api.impl;
 
 import com.be1ive.weather.owm.api.CurrentWeatherOperations;
+import com.be1ive.weather.owm.api.ForecastWeatherOperations;
 import com.be1ive.weather.owm.api.OpenWeatherMap;
 import com.be1ive.weather.owm.api.OpenWeatherMapErrorHandler;
 import com.be1ive.weather.owm.api.ParametrisedList;
@@ -29,6 +30,7 @@ import java.util.Map;
 public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements OpenWeatherMap {
 
     private CurrentWeatherOperations currentWeatherOperations;
+    private ForecastWeatherOperations forecastWeatherOperations;
 
     private ObjectMapper objectMapper;
 
@@ -44,6 +46,11 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     @Override
     public CurrentWeatherOperations currentWeatherOperations() {
         return currentWeatherOperations;
+    }
+
+    @Override
+    public ForecastWeatherOperations forecastWeatherOperations() {
+        return forecastWeatherOperations;
     }
 
     @Override
@@ -100,5 +107,6 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
 
     private void initOperations() {
         currentWeatherOperations = new CurrentWeatherOperationsTemplate(this, getRestTemplate());
+        forecastWeatherOperations = new ForecastWeatherOperationsTemplate(this, getRestTemplate());
     }
 }

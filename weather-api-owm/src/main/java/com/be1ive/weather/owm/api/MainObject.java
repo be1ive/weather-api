@@ -5,35 +5,35 @@ package com.be1ive.weather.owm.api;
  */
 public class MainObject extends OpenWeatherObject {
 
-    private final Double temp;
+    private final Double temperature;
 
     private final Double humidity;
 
-    private final Double tempMin;
+    private final Double minTemperature;
 
-    private final Double tempMax;
+    private final Double maxTemperature;
 
     private final Double pressure;
 
     private final Double seaLevel;
 
-    private final Double grndLevel;
+    private final Double groundLevel;
 
-    public MainObject(Double temp, Double humidity, Double tempMin, Double tempMax, Double pressure, Double seaLevel, Double grndLevel) {
-        this.temp = temp;
+    public MainObject(Double temperature, Double humidity, Double minTemperature, Double maxTemperature, Double pressure, Double seaLevel, Double groundLevel) {
+        this.temperature = temperature;
         this.humidity = humidity;
-        this.tempMin = tempMin;
-        this.tempMax = tempMax;
+        this.minTemperature = minTemperature;
+        this.maxTemperature = maxTemperature;
         this.pressure = pressure;
         this.seaLevel = seaLevel;
-        this.grndLevel = grndLevel;
+        this.groundLevel = groundLevel;
     }
 
     /**
      * Temperature, Kelvin (subtract 273.15 to convert to Celsius)
      */
-    public Double getTemp() {
-        return temp;
+    public Double getTemperature() {
+        return temperature;
     }
 
     /**
@@ -46,15 +46,15 @@ public class MainObject extends OpenWeatherObject {
     /**
      * 	Minimum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally)
      */
-    public Double getTempMin() {
-        return tempMin;
+    public Double getMinTemperature() {
+        return minTemperature;
     }
 
     /**
      * Maximum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally)
      */
-    public Double getTempMax() {
-        return tempMax;
+    public Double getMaxTemperature() {
+        return maxTemperature;
     }
 
     /**
@@ -74,20 +74,20 @@ public class MainObject extends OpenWeatherObject {
     /**
      * Atmospheric pressure on the ground level, hPa
      */
-    public Double getGrndLevel() {
-        return grndLevel;
+    public Double getGroundLevel() {
+        return groundLevel;
     }
 
     @Override
     public String toString() {
         return "MainObject{" +
-                "temp=" + temp +
+                "temperature=" + temperature +
                 ", humidity=" + humidity +
-                ", tempMin=" + tempMin +
-                ", tempMax=" + tempMax +
+                ", minTemperature=" + minTemperature +
+                ", maxTemperature=" + maxTemperature +
                 ", pressure=" + pressure +
                 ", seaLevel=" + seaLevel +
-                ", grndLevel=" + grndLevel +
+                ", groundLevel=" + groundLevel +
                 '}';
     }
 }

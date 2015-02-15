@@ -8,4 +8,6 @@ import com.be1ive.weather.ApiConfigurations;
 public interface OpenWeatherMap extends OpenWeatherMapApi, ApiConfigurations {
 
     CurrentWeatherOperations currentWeatherOperations();
+
+    ForecastWeatherOperations forecastWeatherOperations();
 }

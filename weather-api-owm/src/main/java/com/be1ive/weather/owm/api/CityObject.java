@@ -1,22 +1,20 @@
 package com.be1ive.weather.owm.api;
 
-import java.util.Date;
-
 /**
  * Created by Nikolay on 15.02.2015.
  */
 public class CityObject extends OpenWeatherObject {
 
     private final String id;
-    private final Date dt;
     private final String name;
-    private final LocationObject coord;
+    private final String country;
+    private final LocationObject locationObject;
 
-    public CityObject(String id, Date dt, String name, LocationObject coord) {
+    public CityObject(String id, String name, String country, LocationObject locationObject) {
         this.id = id;
-        this.dt = dt;
         this.name = name;
-        this.coord = coord;
+        this.country = country;
+        this.locationObject = locationObject;
     }
 
     /**
@@ -27,13 +25,6 @@ public class CityObject extends OpenWeatherObject {
     }
 
     /**
-     * 	Data receiving time, unix time, GMT
-     */
-    public Date getDt() {
-        return dt;
-    }
-
-    /**
      * 	City name
      */
     public String getName() {
@@ -41,19 +32,26 @@ public class CityObject extends OpenWeatherObject {
     }
 
     /**
+     * 	City country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
      * 	City Geo location
      */
-    public LocationObject getCoord() {
-        return coord;
+    public LocationObject getLocation() {
+        return locationObject;
     }
 
     @Override
     public String toString() {
         return "CityObject{" +
                 "id='" + id + '\'' +
-                ", dt=" + dt +
                 ", name='" + name + '\'' +
-                ", coord=" + coord +
+                ", country='" + country + '\'' +
+                ", location=" + locationObject +
                 '}';
     }
 }

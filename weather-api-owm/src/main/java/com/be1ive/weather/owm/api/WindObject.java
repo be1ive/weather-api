@@ -7,13 +7,13 @@ public class WindObject extends OpenWeatherObject {
 
     private final Double speed;
 
-    private final Double deg;
+    private final Double degree;
 
     private final Double gust;
 
-    public WindObject(Double speed, Double deg, Double gust) {
+    public WindObject(Double speed, Double degree, Double gust) {
         this.speed = speed;
-        this.deg = deg;
+        this.degree = degree;
         this.gust = gust;
     }
 
@@ -27,8 +27,8 @@ public class WindObject extends OpenWeatherObject {
     /**
      * Wind direction, degrees (meteorological)
      */
-    public Double getDeg() {
-        return deg;
+    public Double getDegree() {
+        return degree;
     }
 
     /**
@@ -42,7 +42,7 @@ public class WindObject extends OpenWeatherObject {
     public String toString() {
         return "WindObject{" +
                 "speed=" + speed +
-                ", deg=" + deg +
+                ", degree=" + degree +
                 ", gust=" + gust +
                 '}';
     }

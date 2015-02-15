@@ -14,12 +14,12 @@ abstract class MainObjectMixin extends OpenWeatherObjectMixin {
 
     @JsonCreator
     MainObjectMixin(
-            @JsonProperty("temp") Double temp,
+            @JsonProperty("temp") Double temperature,
             @JsonProperty("humidity") Double humidity,
-            @JsonProperty("temp_min") Double tempMin,
-            @JsonProperty("temp_max") Double tempMax,
+            @JsonProperty("temp_min") Double minTemperature,
+            @JsonProperty("temp_max") Double maxTemperature,
             @JsonProperty("pressure") Double pressure,
             @JsonProperty("sea_level") Double seaLevel,
-            @JsonProperty("grnd_level") Double grndLevel){}
+            @JsonProperty("grnd_level") Double groundLevel){}
 
 }

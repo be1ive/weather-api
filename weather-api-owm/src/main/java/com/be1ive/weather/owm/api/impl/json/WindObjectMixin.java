@@ -13,7 +13,7 @@ abstract class WindObjectMixin extends OpenWeatherObjectMixin {
     @JsonCreator
     WindObjectMixin(
             @JsonProperty("speed") Double speed,
-            @JsonProperty("deg") Double deg,
+            @JsonProperty("deg") Double degree,
             @JsonProperty("gust") Double gust) {}
 
 }

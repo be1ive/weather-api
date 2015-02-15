@@ -5,62 +5,34 @@ package com.be1ive.weather.owm.api;
  */
 public class LocationObject extends OpenWeatherObject {
 
-    private final Double lat;
+    private final Double latitude;
 
-    private final Double lon;
+    private final Double longitude;
 
-    public LocationObject(Double lat, Double lon) {
-        this.lat = lat;
-        this.lon = lon;
+    public LocationObject(Double latitude, Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
      * Location, latitude
      */
-    public Double getLat() {
-        return lat;
+    public Double getLatitude() {
+        return latitude;
     }
 
     /**
      * Location, longitude
      */
-    public Double getLon() {
-        return lon;
-    }
-
-    public static class Builder {
-        private Double lat;
-        private Double lon;
-
-        public Builder() {
-        }
-
-        public Builder(Double lat, Double lon) {
-            this.lat = lat;
-            this.lon = lon;
-        }
-
-        public Builder latitude(Double lat) {
-            this.lat = lat;
-            return this;
-        }
-
-        public Builder longitude(Double lon) {
-            this.lon = lon;
-            return this;
-        }
-
-        public LocationObject build() {
-            LocationObject object = new LocationObject(lat, lon);
-            return object;
-        }
+    public Double getLongitude() {
+        return longitude;
     }
 
     @Override
     public String toString() {
         return "LocationObject{" +
-                "lat=" + lat +
-                ", lon=" + lon +
+                "lat=" + latitude +
+                ", lon=" + longitude +
                 '}';
     }
 }
