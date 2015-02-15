@@ -1,1 +1,1 @@
-# weather-api
+# Core Weather Module
