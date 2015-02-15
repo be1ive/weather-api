@@ -16,9 +16,10 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AbstractWeatherMixin extends OpenWeatherMapObjectMixin {
 
-    @JsonCreator
-    AbstractWeatherMixin(
-            @JsonProperty("dt") @JsonDeserialize(using = UnixDateDeserializer.class) Date date,
-            @JsonProperty("weather") @JsonDeserialize(using = WeatherConditionListDeserializer.class) List<WeatherCondition> conditions) {}
+    @JsonProperty("dt")
+    @JsonDeserialize(using = UnixDateDeserializer.class) Date date;
+
+    @JsonProperty("weather")
+    @JsonDeserialize(using = WeatherConditionListDeserializer.class) List<WeatherCondition> conditions;
 
 }

@@ -1,6 +1,7 @@
 package com.be1ive.weather.owm.api.impl;
 
 import com.be1ive.weather.owm.api.CurrentConditionsOperations;
+import com.be1ive.weather.owm.api.DailyForecastOperations;
 import com.be1ive.weather.owm.api.HourlyForecastOperations;
 import com.be1ive.weather.owm.api.OpenWeatherMap;
 import com.be1ive.weather.owm.api.OpenWeatherMapErrorHandler;
@@ -30,6 +31,7 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
 
     private CurrentConditionsOperations currentConditionsOperations;
     private HourlyForecastOperations hourlyForecastOperations;
+    private DailyForecastOperations dailyForecastOperations;
 
     private ObjectMapper objectMapper;
 
@@ -50,6 +52,11 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     @Override
     public HourlyForecastOperations hourlyForecastOperations() {
         return hourlyForecastOperations;
+    }
+
+    @Override
+    public DailyForecastOperations dailyForecastOperations() {
+        return dailyForecastOperations;
     }
 
     @Override
@@ -106,6 +113,7 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
 
     private void initOperations() {
         currentConditionsOperations = new CurrentConditionsOperationsTemplate(this, getRestTemplate());
-        hourlyForecastOperations = new ForecastOperationsTemplate(this, getRestTemplate());
+        hourlyForecastOperations = new HourlyForecastOperationsTemplate(this, getRestTemplate());
+        dailyForecastOperations = new DailyForecastOperationsTemplate(this, getRestTemplate());
     }
 }

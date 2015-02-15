@@ -1,14 +1,9 @@
 package com.be1ive.weather.owm.api;
 
-import java.util.Date;
-import java.util.List;
-
 /**
- * Created by Nikolay on 14.02.2015.
+ * Created by Nikolay on 15.02.2015.
  */
-public class CurrentWeather extends AbstractWeather {
-
-    private SystemObject systemObject;
+public class DailyWeather extends AbstractWeather {
 
     private MainObject mainObject;
 
@@ -20,12 +15,7 @@ public class CurrentWeather extends AbstractWeather {
 
     private SnowObject snowObject;
 
-    /**
-     * 	System Information
-     */
-    public SystemObject getSystem() {
-        return systemObject;
-    }
+    private TemperatureObject temperatureObject;
 
     /**
      * 	Main Information
@@ -62,12 +52,11 @@ public class CurrentWeather extends AbstractWeather {
         return snowObject;
     }
 
-    @Override
-    public String toString() {
-        return "CurrentWeather{" +
-                "systemObject=" + systemObject +
-                ", mainObject=" + mainObject +
-                '}';
+    /**
+     * 	Temperature Information
+     */
+    public TemperatureObject getTemperatureObject() {
+        return temperatureObject;
     }
 
     /**
@@ -75,49 +64,13 @@ public class CurrentWeather extends AbstractWeather {
      */
     public static class MainObject extends OpenWeatherMapObject {
 
-        private final Double temperature;
-
         private final Double humidity;
-
-        private final Double minTemperature;
-
-        private final Double maxTemperature;
 
         private final Double pressure;
 
-        private final Double seaLevel;
-
-        private final Double groundLevel;
-
-        public MainObject(Double temperature, Double minTemperature, Double maxTemperature, Double humidity, Double pressure, Double seaLevel, Double groundLevel) {
-            this.temperature = temperature;
-            this.minTemperature = minTemperature;
-            this.maxTemperature = maxTemperature;
+        public MainObject(Double humidity, Double pressure) {
             this.humidity = humidity;
             this.pressure = pressure;
-            this.seaLevel = seaLevel;
-            this.groundLevel = groundLevel;
-        }
-
-        /**
-         * Temperature, Kelvin (subtract 273.15 to convert to Celsius)
-         */
-        public Double getTemperature() {
-            return temperature;
-        }
-
-        /**
-         * 	Minimum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally)
-         */
-        public Double getMinTemperature() {
-            return minTemperature;
-        }
-
-        /**
-         * Maximum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally)
-         */
-        public Double getMaxTemperature() {
-            return maxTemperature;
         }
 
         /**
@@ -134,89 +87,89 @@ public class CurrentWeather extends AbstractWeather {
             return pressure;
         }
 
-        /**
-         * Atmospheric pressure on the sea level, hPa
-         */
-        public Double getSeaLevel() {
-            return seaLevel;
-        }
-
-        /**
-         * Atmospheric pressure on the ground level, hPa
-         */
-        public Double getGroundLevel() {
-            return groundLevel;
-        }
-
         @Override
         public String toString() {
             return "MainObject{" +
-                    "temperature=" + temperature +
-                    ", minTemperature=" + minTemperature +
-                    ", maxTemperature=" + maxTemperature +
-                    ", humidity=" + humidity +
+                    "humidity=" + humidity +
                     ", pressure=" + pressure +
-                    ", seaLevel=" + seaLevel +
-                    ", groundLevel=" + groundLevel +
                     '}';
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
-    public static class SystemObject extends OpenWeatherMapObject {
+    public static class TemperatureObject extends OpenWeatherMapObject {
 
-        private final String message;
+        private final Double temperature;
 
-        private final String country;
+        private final Double minTemperature;
 
-        private final Date sunrise;
+        private final Double maxTemperature;
 
-        private final Date sunset;
+        private final Double eveningTemperature;
 
-        public SystemObject(String message, String country, Date sunrise, Date sunset) {
-            this.message = message;
-            this.country = country;
-            this.sunrise = sunrise;
-            this.sunset = sunset;
+        private final Double nightTemperature;
+
+        private final Double morningTemperature;
+
+        public TemperatureObject(Double temperature, Double minTemperature, Double eveningTemperature, Double nightTemperature, Double morningTemperature, Double maxTemperature) {
+            this.temperature = temperature;
+            this.minTemperature = minTemperature;
+            this.maxTemperature = maxTemperature;
+            this.eveningTemperature = eveningTemperature;
+            this.nightTemperature = nightTemperature;
+            this.morningTemperature = morningTemperature;
         }
 
         /**
-         * System parameter, do not use it
+         * Day temperature, Kelvin (subtract 273.15 to convert to Celsius)
          */
-        public String getMessage() {
-            return message;
+        public Double getTemperature() {
+            return temperature;
         }
 
         /**
-         * Country (GB, JP etc.)
+         * 	Min daily temperature, Kelvin
          */
-        public String getCountry() {
-            return country;
+        public Double getMinTemperature() {
+            return minTemperature;
         }
 
         /**
-         * Sunrise time, unix, UTC
+         * Max daily temperature, Kelvin
          */
-        public Date getSunrise() {
-            return sunrise;
+        public Double getMaxTemperature() {
+            return maxTemperature;
         }
 
         /**
-         * Sunset time, unix, UTC
+         * Evening temperature, Kelvin
          */
-        public Date getSunset() {
-            return sunset;
+        public Double getEveningTemperature() {
+            return eveningTemperature;
+        }
+
+        /**
+         * Night temperature, Kelvin
+         */
+        public Double getNightTemperature() {
+            return nightTemperature;
+        }
+
+        /**
+         * Morning temperature, Kelvin
+         */
+        public Double getMorningTemperature() {
+            return morningTemperature;
         }
 
         @Override
         public String toString() {
-            return "SystemObject{" +
-                    "message='" + message + '\'' +
-                    ", country='" + country + '\'' +
-                    ", sunrise=" + sunrise +
-                    ", sunset=" + sunset +
+            return "TemperatureObject{" +
+                    "temperature=" + temperature +
+                    ", minTemperature=" + minTemperature +
+                    ", maxTemperature=" + maxTemperature +
+                    ", eveningTemperature=" + eveningTemperature +
+                    ", nightTemperature=" + nightTemperature +
+                    ", morningTemperature=" + morningTemperature +
                     '}';
         }
     }
@@ -346,4 +299,5 @@ public class CurrentWeather extends AbstractWeather {
                     '}';
         }
     }
+
 }

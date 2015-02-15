@@ -24,26 +24,26 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     }
 
     @Override
-    public CurrentConditions currentWeatherByCityName(String city) {
+    public CurrentConditions currentConditionsByCityName(String city) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
         return api.fetchObject("weather", CurrentConditions.class, queryParams);
     }
 
     @Override
-    public CurrentConditions currentWeatherByCityAndCountryCode(String city, String country) {
-        return currentWeatherByCityName(city + "," + country);
+    public CurrentConditions currentConditionsByCityAndCountryCode(String city, String country) {
+        return currentConditionsByCityName(city + "," + country);
     }
 
     @Override
-    public CurrentConditions currentWeatherByCityId(String id) {
+    public CurrentConditions currentConditionsByCityId(String id) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
         return api.fetchObject("weather", CurrentConditions.class, queryParams);
     }
 
     @Override
-    public ParametrisedList<CurrentConditions> currentWeatherByCityIds(String... ids) {
+    public ParametrisedList<CurrentConditions> currentConditionsByCityIds(String... ids) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         StringBuilder sb = new StringBuilder("");
         for (String id : ids) {
@@ -56,7 +56,7 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     }
 
     @Override
-    public CurrentConditions currentWeatherByLatLon(double lat, double lon) {
+    public CurrentConditions currentConditionsByLatLon(double lat, double lon) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(lat));
         queryParams.set("lon", Double.toString(lon));
@@ -64,14 +64,14 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     }
 
     @Override
-    public ParametrisedList<CurrentConditions> currentWeatherInBox(double topLeftLat, double topLeftLon, double botRightLat, double botRightLon) {
+    public ParametrisedList<CurrentConditions> currentConditionsInBox(double topLeftLat, double topLeftLon, double botRightLat, double botRightLon) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("bbox", Double.toString(topLeftLat) + "," + Double.toString(topLeftLon) + "," + Double.toString(botRightLat) + "," + Double.toString(botRightLon));
         return api.fetchObjects("box/city", CurrentConditions.class, queryParams);
     }
 
     @Override
-    public ParametrisedList<CurrentConditions> currentWeatherInCircle(double centrLat, double centrLon, int cnt) {
+    public ParametrisedList<CurrentConditions> currentConditionsInCircle(double centrLat, double centrLon, int cnt) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(centrLat));
         queryParams.set("lon", Double.toString(centrLon));

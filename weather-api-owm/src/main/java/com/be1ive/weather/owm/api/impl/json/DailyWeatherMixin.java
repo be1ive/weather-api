@@ -1,36 +1,41 @@
 package com.be1ive.weather.owm.api.impl.json;
 
+import com.be1ive.weather.owm.api.AbstractWeather;
 import com.be1ive.weather.owm.api.CurrentWeather;
+import com.be1ive.weather.owm.api.DailyWeather;
+import com.be1ive.weather.owm.api.WeatherCondition;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Nikolay on 15.02.2015.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CurrentWeatherMixin extends AbstractWeatherMixin {
+public class DailyWeatherMixin extends AbstractWeatherMixin {
 
-    @JsonProperty("wind")
-    CurrentWeather.WindObject windObject;
+    @JsonUnwrapped
+    DailyWeather.WindObject windObject;
 
-    @JsonProperty("clouds")
-    CurrentWeather.CloudsObject cloudsObject;
+    @JsonUnwrapped
+    DailyWeather.CloudsObject cloudsObject;
 
-    @JsonProperty("rain")
-    CurrentWeather.RainObject rainObject;
+    @JsonUnwrapped
+    DailyWeather.RainObject rainObject;
 
-    @JsonProperty("snow")
-    CurrentWeather.SnowObject snowObject;
+    @JsonUnwrapped
+    DailyWeather.SnowObject snowObject;
 
-    @JsonProperty("sys")
-    CurrentWeather.SystemObject systemObject;
+    @JsonUnwrapped
+    DailyWeather.MainObject mainObject;
 
-    @JsonProperty("main")
-    CurrentWeather.MainObject mainObject;
+    @JsonProperty("temp")
+    DailyWeather.TemperatureObject temperatureObject;
 
     /**
      * Created by Nikolay on 14.02.2015.
@@ -40,7 +45,7 @@ public class CurrentWeatherMixin extends AbstractWeatherMixin {
 
         @JsonCreator
         CloudsObjectMixin(
-                @JsonProperty("all") Double cloudiness) {}
+                @JsonProperty("clouds") Double cloudiness) {}
 
     }
 
@@ -52,7 +57,7 @@ public class CurrentWeatherMixin extends AbstractWeatherMixin {
 
         @JsonCreator
         RainObjectMixin(
-                @JsonProperty("3h") Double volume){}
+                @JsonProperty("rain") Double volume){}
 
     }
 
@@ -78,7 +83,24 @@ public class CurrentWeatherMixin extends AbstractWeatherMixin {
 
         @JsonCreator
         SnowObjectMixin(
-                @JsonProperty("3h") Double volume){}
+                @JsonProperty("snow") Double volume){}
+
+    }
+
+    /**
+     * Created by Nikolay on 14.02.2015.
+     */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    abstract static class TemperatureObjectMixin extends OpenWeatherMapObjectMixin {
+
+        @JsonCreator
+        TemperatureObjectMixin(
+                @JsonProperty("day") Double temperature,
+                @JsonProperty("min") Double minTemperature,
+                @JsonProperty("max") Double maxTemperature,
+                @JsonProperty("eve") Double eveningTemperature,
+                @JsonProperty("night") Double nightTemperature,
+                @JsonProperty("morn") Double morningTemperature){}
 
     }
 
@@ -90,28 +112,9 @@ public class CurrentWeatherMixin extends AbstractWeatherMixin {
 
         @JsonCreator
         MainObjectMixin(
-                @JsonProperty("temp") Double temperature,
-                @JsonProperty("temp_min") Double minTemperature,
-                @JsonProperty("temp_max") Double maxTemperature,
                 @JsonProperty("humidity") Double humidity,
-                @JsonProperty("pressure") Double pressure,
-                @JsonProperty("sea_level") Double seaLevel,
-                @JsonProperty("grnd_level") Double groundLevel){}
+                @JsonProperty("pressure") Double pressure){}
 
-    }
-
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    abstract static class SystemObjectMixin extends OpenWeatherMapObjectMixin {
-
-        @JsonCreator
-        SystemObjectMixin(
-                @JsonProperty("message") String message,
-                @JsonProperty("country") String country,
-                @JsonDeserialize(using = UnixDateDeserializer.class) @JsonProperty("sunrise") Date sunrise,
-                @JsonDeserialize(using = UnixDateDeserializer.class) @JsonProperty("sunset") Date sunset) {}
     }
 
 }

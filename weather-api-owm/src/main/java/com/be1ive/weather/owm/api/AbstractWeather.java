@@ -8,14 +8,9 @@ import java.util.List;
  */
 public class AbstractWeather extends OpenWeatherMapObject {
 
-    private final Date date;
+    private Date date;
 
-    private final List<WeatherCondition> conditions;
-
-    public AbstractWeather(Date date, List<WeatherCondition> conditions) {
-        this.date = date;
-        this.conditions = conditions;
-    }
+    private List<WeatherCondition> conditions;
 
     /**
      * 	Data receiving time, unix time, GMT
