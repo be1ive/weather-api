@@ -1,1 +1,1 @@
-# weather-api
+# Open Weather Map Module
