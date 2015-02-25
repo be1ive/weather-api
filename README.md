@@ -7,13 +7,13 @@ Currently supported rest-apis:
 # Download Artifacts
 
     <dependency>
-        <groupId>com.be1ive.weather</groupId>
+        <groupId>com.belive.weather</groupId>
         <artifactId>weather-api-core</artifactId>
-        <version>{com.be1ive.weather.version}</version>
+        <version>{com.belive.weather.version}</version>
     </dependency>
     
     <dependency>
-        <groupId>com.be1ive.weather</groupId>
+        <groupId>com.belive.weather</groupId>
         <artifactId>weather-api-owm</artifactId>
-        <version>{com.be1ive.weather.version}</version>
+        <version>{com.belive.weather.version}</version>
     </dependency>
