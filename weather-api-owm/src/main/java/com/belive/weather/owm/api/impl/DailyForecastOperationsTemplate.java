@@ -24,7 +24,11 @@
 
 package com.belive.weather.owm.api.impl;
 
-import com.belive.weather.owm.api.*;
+import com.belive.weather.owm.api.City;
+import com.belive.weather.owm.api.DailyCityForecast;
+import com.belive.weather.owm.api.DailyForecast;
+import com.belive.weather.owm.api.DailyForecastOperations;
+import com.belive.weather.owm.api.OpenWeatherMapApi;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -50,7 +54,7 @@ public class DailyForecastOperationsTemplate implements DailyForecastOperations 
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
         return api.fetchObject("forecast/daily", TypeFactory
-                .defaultInstance().constructType(DailyForecast.class, City.class), queryParams);
+                .defaultInstance().constructType(DailyCityForecast.class), queryParams);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class DailyForecastOperationsTemplate implements DailyForecastOperations 
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
         return api.fetchObject("forecast/daily", TypeFactory
-                .defaultInstance().constructType(DailyForecast.class, City.class), queryParams);
+                .defaultInstance().constructType(DailyCityForecast.class), queryParams);
     }
 
     @Override
@@ -72,6 +76,6 @@ public class DailyForecastOperationsTemplate implements DailyForecastOperations 
         queryParams.set("lat", Double.toString(lat));
         queryParams.set("lon", Double.toString(lon));
         return api.fetchObject("forecast/daily", TypeFactory
-                .defaultInstance().constructType(DailyForecast.class, City.class), queryParams);
+                .defaultInstance().constructType(DailyCityForecast.class), queryParams);
     }
 }

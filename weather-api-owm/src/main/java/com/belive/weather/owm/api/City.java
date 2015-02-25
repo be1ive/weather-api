@@ -30,7 +30,12 @@ package com.belive.weather.owm.api;
  */
 public class City extends AbstractPlace {
 
-    private String country;
+    private final String country;
+
+    public City(String id, String name, Location location, String country) {
+        super(id, name, location);
+        this.country = country;
+    }
 
     /**
      * 	City country

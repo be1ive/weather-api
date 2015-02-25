@@ -22,14 +22,25 @@
  * SOFTWARE.
  */
 
-package com.belive.weather.owm.api;
+package com.belive.weather.owm.api.impl.json;
+
+import com.belive.weather.owm.api.CurrentWeather;
+import com.belive.weather.owm.api.Station;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class HistoricalConditions<T extends AbstractPlace> {
+@JsonIgnoreProperties(ignoreUnknown = true)
+abstract class CurrentStationConditionsMixin extends OpenWeatherMapObjectMixin {
 
-    private T place;
+    @JsonProperty("station")
+    Station place;
+
+    @JsonProperty("last")
+    CurrentWeather currentWeather;
 
 }

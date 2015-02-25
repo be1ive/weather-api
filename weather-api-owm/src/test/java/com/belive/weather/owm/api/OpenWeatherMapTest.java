@@ -40,14 +40,14 @@ public class OpenWeatherMapTest {
         DailyForecastOperations dfo = openWeatherMap.dailyForecastOperations();
         dfo.forecastNearCityByCityName("Москва");
 
-//        CurrentConditions currentConditions = cwo.conditionsNearCityByCityName("Москва");
+        CurrentConditions<City> currentCityConditions = cwo.conditionsNearCityByCityName("Москва");
 //        HourlyForecast hourlyForecast = fwo.forecastNearCityByCityName("Москва");
 //        ParametrisedList<CurrentWeather> currentWeathers2 =
 //                cwo.conditionsNearCityInBox(new BoxParameters().topLatitude(12).topLongitude(32).botLatitude(15).botLongitude(37));
 //
-        ParametrisedList<CurrentConditions<City>> currentWeathers3 =
-                cwo.conditionsNearCityByCityIds("524901", "703448");
-
-        System.out.print(currentWeathers3);
+//        ParametrisedList<CurrentConditions<City>> currentWeathers3 =
+//                cwo.conditionsNearCityByCityIds("524901", "703448");
+//
+//        System.out.print(currentWeathers3);
     }
 }

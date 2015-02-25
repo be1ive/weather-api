@@ -24,7 +24,11 @@
 
 package com.belive.weather.owm.api.impl;
 
-import com.belive.weather.owm.api.*;
+import com.belive.weather.owm.api.City;
+import com.belive.weather.owm.api.HourlyCityForecast;
+import com.belive.weather.owm.api.HourlyForecast;
+import com.belive.weather.owm.api.HourlyForecastOperations;
+import com.belive.weather.owm.api.OpenWeatherMapApi;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -50,7 +54,7 @@ public class HourlyForecastOperationsTemplate implements HourlyForecastOperation
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
         return api.fetchObject("forecast", TypeFactory
-                .defaultInstance().constructType(HourlyForecast.class, City.class), queryParams);
+                .defaultInstance().constructType(HourlyCityForecast.class), queryParams);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class HourlyForecastOperationsTemplate implements HourlyForecastOperation
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
         return api.fetchObject("forecast", TypeFactory
-                .defaultInstance().constructType(HourlyForecast.class, City.class), queryParams);
+                .defaultInstance().constructType(HourlyCityForecast.class), queryParams);
     }
 
     @Override
@@ -72,6 +76,6 @@ public class HourlyForecastOperationsTemplate implements HourlyForecastOperation
         queryParams.set("lat", Double.toString(lat));
         queryParams.set("lon", Double.toString(lon));
         return api.fetchObject("forecast", TypeFactory
-                .defaultInstance().constructType(HourlyForecast.class, City.class), queryParams);
+                .defaultInstance().constructType(HourlyCityForecast.class), queryParams);
     }
 }

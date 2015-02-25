@@ -36,7 +36,7 @@ public interface CurrentConditionsOperations {
     /**
      * Retrieves current weather conditions by city name
      * @param city City Name
-     * @return the requested {@link CurrentConditions}
+     * @return the requested {@link CurrentCityConditions}
      */
     CurrentConditions<City> conditionsNearCityByCityName(String city);
 
@@ -44,21 +44,21 @@ public interface CurrentConditionsOperations {
      * Retrieves current weather conditions by city name and country code
      * @param city City Name
      * @param country Country Code
-     * @return the requested {@link CurrentConditions}
+     * @return the requested {@link CurrentCityConditions}
      */
     CurrentConditions<City> conditionsNearCityByCityAndCountryCode(String city, String country);
 
     /**
      * Retrieves current weather by city id
      * @param id City Id
-     * @return the requested {@link CurrentConditions}
+     * @return the requested {@link CurrentCityConditions}
      */
     CurrentConditions<City> conditionsNearCityByCityId(String id);
 
     /**
      * Retrieves current weather conditions for several city IDs
      * @param ids City Ids
-     * @return the requested {@link ParametrisedList<CurrentConditions>}
+     * @return the requested {@link ParametrisedList< CurrentCityConditions >}
      */
     ParametrisedList<CurrentConditions<City>> conditionsNearCityByCityIds(String... ids);
 
@@ -66,7 +66,7 @@ public interface CurrentConditionsOperations {
      * Retrieves current weather conditions by geographic coordinates
      * @param lat Latitude
      * @param lon Longitude
-     * @return the requested {@link CurrentConditions}
+     * @return the requested {@link CurrentCityConditions}
      */
     CurrentConditions<City> conditionsNearCityByLatLon(double lat, double lon);
 
@@ -76,7 +76,7 @@ public interface CurrentConditionsOperations {
      * @param topLeftLon Longitude of the top left point
      * @param botRightLat Latitude of the bottom right point
      * @param botRightLon Longitude of the bottom right point
-     * @return the requested {@link ParametrisedList<CurrentConditions>}
+     * @return the requested {@link ParametrisedList< CurrentCityConditions >}
      */
     ParametrisedList<CurrentConditions<City>> conditionsNearCityInBox(double topLeftLat, double topLeftLon,
             double botRightLat, double botRightLon);
@@ -86,7 +86,7 @@ public interface CurrentConditionsOperations {
      * @param centrLat Latitude of the center point
      * @param centrLon Longitude of the center point
      * @param cnt Expected number of points
-     * @return the requested {@link ParametrisedList<CurrentConditions>}
+     * @return the requested {@link ParametrisedList< CurrentCityConditions >}
      */
     ParametrisedList<CurrentConditions<City>> conditionsNearCityInCircle(double centrLat, double centrLon, int cnt);
 

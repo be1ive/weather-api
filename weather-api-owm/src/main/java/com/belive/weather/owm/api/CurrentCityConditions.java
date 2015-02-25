@@ -22,24 +22,38 @@
  * SOFTWARE.
  */
 
-package com.belive.weather.owm.api.impl.json;
+package com.belive.weather.owm.api;
 
-import com.belive.weather.owm.api.Location;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-abstract class AbstractPlaceMixin extends OpenWeatherMapObjectMixin {
+public class CurrentCityConditions extends CurrentConditions<City> {
 
-    @JsonCreator
-    AbstractPlaceMixin(
-            @JsonProperty("id") String id,
-            @JsonProperty("name") String name,
-            @JsonProperty("coord") Location location) {}
+    private City place;
 
+    private CurrentWeather currentWeather;
+
+    /**
+     * 	City Information
+     */
+    public City getPlace() {
+        return place;
+    }
+
+    /**
+     * 	Weather Information
+     */
+    public CurrentWeather getCurrentWeather() {
+        return currentWeather;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentCityConditions{" +
+                "place=" + place +
+                ", currentWeather=" + currentWeather +
+                '}';
+    }
 }

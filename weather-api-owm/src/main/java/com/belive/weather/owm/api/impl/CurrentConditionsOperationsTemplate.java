@@ -24,8 +24,12 @@
 
 package com.belive.weather.owm.api.impl;
 
-import com.belive.weather.owm.api.*;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.belive.weather.owm.api.City;
+import com.belive.weather.owm.api.CurrentCityConditions;
+import com.belive.weather.owm.api.CurrentConditions;
+import com.belive.weather.owm.api.CurrentConditionsOperations;
+import com.belive.weather.owm.api.OpenWeatherMapApi;
+import com.belive.weather.owm.api.ParametrisedList;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -51,7 +55,7 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     public CurrentConditions<City> conditionsNearCityByCityName(String city) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
-        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
+        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     public CurrentConditions<City> conditionsNearCityByCityId(String id) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
-        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
+        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 
     @Override
@@ -76,7 +80,7 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
         sb.deleteCharAt(0);
         queryParams.add("id", sb.toString());
 
-        return api.fetchObjects("group", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
+        return api.fetchObjects("group", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 
     @Override
@@ -84,7 +88,7 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(lat));
         queryParams.set("lon", Double.toString(lon));
-        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
+        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 
     @Override
@@ -92,7 +96,7 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
             double botRightLat, double botRightLon) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("bbox", Double.toString(topLeftLat) + "," + Double.toString(topLeftLon) + "," + Double.toString(botRightLat) + "," + Double.toString(botRightLon));
-        return api.fetchObjects("box/city", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
+        return api.fetchObjects("box/city", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 
     @Override
@@ -101,6 +105,6 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
         queryParams.set("lat", Double.toString(centrLat));
         queryParams.set("lon", Double.toString(centrLon));
         queryParams.set("count", cnt == 0 ? "1" : Integer.toString(cnt));
-        return api.fetchObjects("find", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
+        return api.fetchObjects("find", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 }

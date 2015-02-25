@@ -30,9 +30,14 @@ package com.belive.weather.owm.api;
  */
 public class Location extends OpenWeatherMapObject {
 
-    private Double latitude;
+    private final Double latitude;
 
-    private Double longitude;
+    private final Double longitude;
+
+    public Location(Double latitude, Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     /**
      * Location, latitude

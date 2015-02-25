@@ -36,9 +36,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class StationMixin extends AbstractPlaceMixin {
 
-    @JsonProperty("type")
-    String type;
+    @JsonCreator
+    StationMixin(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name,
+            @JsonProperty("coord") Location location,
+            @JsonProperty("type") String type,
+            @JsonProperty("status") String status)
+    {
+        super(id, name, location);
+    }
 
-    @JsonProperty("status")
-    String status;
 }

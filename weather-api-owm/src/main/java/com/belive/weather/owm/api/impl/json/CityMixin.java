@@ -36,7 +36,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class CityMixin extends AbstractPlaceMixin {
 
-    @JsonProperty("country")
-    String country;
+    @JsonCreator
+    CityMixin(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name,
+            @JsonProperty("coord") Location location,
+            @JsonProperty("country") String country)
+    {
+        super(id, name, location);
+    }
 
 }

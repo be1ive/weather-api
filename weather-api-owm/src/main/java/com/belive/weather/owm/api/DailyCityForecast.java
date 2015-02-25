@@ -22,13 +22,7 @@
  * SOFTWARE.
  */
 
-package com.belive.weather.owm.api.impl.json;
-
-import com.belive.weather.owm.api.AbstractPlace;
-import com.belive.weather.owm.api.City;
-import com.belive.weather.owm.api.DailyWeather;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.belive.weather.owm.api;
 
 import java.util.List;
 
@@ -36,12 +30,25 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-abstract class DailyForecastMixin<T extends AbstractPlace> extends OpenWeatherMapObjectMixin {
+public class DailyCityForecast extends DailyForecast<City> {
 
-    @JsonProperty("city")
-    T place;
+    private City place;
 
-    @JsonProperty("list")
-    List<DailyWeather> dailyWeather;
+    private List<DailyWeather> dailyWeather;
+
+    /**
+     * 	City Information
+     */
+    public City getPlace() {
+        return place;
+    }
+
+    /**
+     * 	Weather Information
+     */
+    public List<DailyWeather> getDailyWeather() {
+        return dailyWeather;
+    }
+
+
 }

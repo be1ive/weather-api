@@ -30,9 +30,15 @@ package com.belive.weather.owm.api;
  */
 public class Station extends AbstractPlace {
 
-    private String type;
+    private final String type;
 
-    private String status;
+    private final String status;
+
+    public Station(String id, String name, Location location, String type, String status) {
+        super(id, name, location);
+        this.type = type;
+        this.status = status;
+    }
 
     /**
      * Station type

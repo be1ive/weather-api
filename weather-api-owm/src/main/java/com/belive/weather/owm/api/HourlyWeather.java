@@ -21,25 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.belive.weather.owm.api.impl.json;
-
-import com.belive.weather.owm.api.Location;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.belive.weather.owm.api;
 
 /**
  * @author Nikolay Denisenko
- * @version 2015/02/16
+ * @version 2015/02/26
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-abstract class AbstractPlaceMixin extends OpenWeatherMapObjectMixin {
-
-    @JsonCreator
-    AbstractPlaceMixin(
-            @JsonProperty("id") String id,
-            @JsonProperty("name") String name,
-            @JsonProperty("coord") Location location) {}
-
+public class HourlyWeather extends CurrentWeather {
 }

@@ -24,14 +24,20 @@
 
 package com.belive.weather.owm.api.impl.json;
 
-import com.belive.weather.owm.api.*;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.belive.weather.owm.api.AbstractPlace;
+import com.belive.weather.owm.api.AbstractWeather;
+import com.belive.weather.owm.api.City;
+import com.belive.weather.owm.api.CurrentCityConditions;
+import com.belive.weather.owm.api.CurrentStationConditions;
+import com.belive.weather.owm.api.CurrentWeather;
+import com.belive.weather.owm.api.DailyCityForecast;
+import com.belive.weather.owm.api.DailyWeather;
+import com.belive.weather.owm.api.HourlyCityForecast;
+import com.belive.weather.owm.api.HourlyWeather;
+import com.belive.weather.owm.api.Location;
+import com.belive.weather.owm.api.OpenWeatherMapObject;
+import com.belive.weather.owm.api.Station;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
-import java.io.IOException;
 
 /**
  * @author Nikolay Denisenko
@@ -55,9 +61,10 @@ public class OpenWeatherMapModule extends SimpleModule {
         context.setMixInAnnotations(Station.class, StationMixin.class);
         context.setMixInAnnotations(Location.class, LocationMixin.class);
 
-        context.setMixInAnnotations(CurrentConditions.class, CurrentConditionsMixin.class);
-        context.setMixInAnnotations(HourlyForecast.class, HourlyForecastMixin.class);
-        context.setMixInAnnotations(DailyForecast.class, DailyForecastMixin.class);
+        context.setMixInAnnotations(CurrentCityConditions.class, CurrentCityConditionsMixin.class);
+        context.setMixInAnnotations(CurrentStationConditions.class, CurrentStationConditionsMixin.class);
+        context.setMixInAnnotations(HourlyCityForecast.class, HourlyCityForecastMixin.class);
+        context.setMixInAnnotations(DailyCityForecast.class, DailyCityForecastMixin.class);
 
         context.setMixInAnnotations(AbstractWeather.class, AbstractWeatherMixin.class);
 
@@ -76,5 +83,7 @@ public class OpenWeatherMapModule extends SimpleModule {
         context.setMixInAnnotations(DailyWeather.RainObject.class, DailyWeatherMixin.RainObjectMixin.class);
         context.setMixInAnnotations(DailyWeather.SnowObject.class, DailyWeatherMixin.SnowObjectMixin.class);
         context.setMixInAnnotations(DailyWeather.TemperatureObject.class, DailyWeatherMixin.TemperatureObjectMixin.class);
+
+        context.setMixInAnnotations(HourlyWeather.class, CurrentWeatherMixin.class);
     }
 }

@@ -30,11 +30,17 @@ package com.belive.weather.owm.api;
  */
 public abstract class AbstractPlace extends OpenWeatherMapObject {
 
-    protected String id;
+    protected final String id;
 
-    protected String name;
+    protected final String name;
 
-    protected Location location;
+    protected final Location location;
+
+    public AbstractPlace(String id, String name, Location location) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+    }
 
     /**
      * 	Place identification
