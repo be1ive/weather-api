@@ -25,18 +25,14 @@
 package com.belive.weather.owm.api;
 
 /**
- * Created by Nikolay on 14.02.2015.
+ * @author Nikolay Denisenko
+ * @version 2015/02/16
  */
 public class Location extends OpenWeatherMapObject {
 
-    private final Double latitude;
+    private Double latitude;
 
-    private final Double longitude;
-
-    public Location(Double latitude, Double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    private Double longitude;
 
     /**
      * Location, latitude
@@ -54,7 +50,7 @@ public class Location extends OpenWeatherMapObject {
 
     @Override
     public String toString() {
-        return "LocationObject{" +
+        return "Location{" +
                 "lat=" + latitude +
                 ", lon=" + longitude +
                 '}';

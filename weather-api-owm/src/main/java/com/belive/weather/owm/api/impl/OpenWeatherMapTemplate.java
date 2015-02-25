@@ -33,6 +33,8 @@ import com.belive.weather.owm.api.OpenWeatherMapErrorHandler;
 import com.belive.weather.owm.api.ParametrisedList;
 import com.belive.weather.owm.api.impl.json.OpenWeatherMapModule;
 import com.belive.weather.support.URIBuilder;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -85,19 +87,28 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     }
 
     @Override
-    public <T> T fetchObject(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters) {
+    public <T> T fetchObject(String objectName, JavaType type, MultiValueMap<String, String> queryParameters) {
         URI uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
-        return getRestTemplate().getForObject(uri, type);
+        JsonNode jsonNode = getRestTemplate().getForObject(uri, JsonNode.class);
+        return entry(type, jsonNode);
     }
 
     @Override
-    public <T> ParametrisedList<T> fetchObjects(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters) {
+    public <T> ParametrisedList<T> fetchObjects(String objectName, JavaType type, MultiValueMap<String, String> queryParameters) {
         URI uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
         JsonNode jsonNode = getRestTemplate().getForObject(uri, JsonNode.class);
         return list(type, jsonNode);
     }
 
-    private <T> ParametrisedList<T> list(Class<T> type, JsonNode jsonNode) {
+    private <T> T entry(JavaType type, JsonNode jsonNode) {
+        try {
+            return (T) objectMapper.reader(type).readValue(jsonNode.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private <T> ParametrisedList<T> list(JavaType type, JsonNode jsonNode) {
         List<T> list = deserializeList(jsonNode.get("list"), type);
         Map<String, String> params = new HashMap<>();
         for (Iterator<Map.Entry<String, JsonNode>> itr = jsonNode.fields(); itr.hasNext();) {
@@ -109,12 +120,12 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
         return new ParametrisedList<T>(list, params);
     }
 
-    private <T> List<T> deserializeList(JsonNode jsonNode, final Class<T> elementType) {
+    private <T> List<T> deserializeList(JsonNode jsonNode, final JavaType elementType) {
         try {
             CollectionType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, elementType);
             return (List<T>) objectMapper.reader(listType).readValue(jsonNode.toString());
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 

@@ -30,17 +30,17 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class DailyForecast extends OpenWeatherMapObject {
+public class DailyForecast<T extends AbstractPlace> extends OpenWeatherMapObject {
 
-    private City city;
+    private T place;
 
     private List<DailyWeather> dailyWeather;
 
     /**
-     * 	City Information
+     * 	Place Information
      */
-    public City getCity() {
-        return city;
+    public T getPlace() {
+        return place;
     }
 
     /**

@@ -35,7 +35,7 @@ import java.util.Date;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class UnixDateDeserializer extends JsonDeserializer<Date> {
+class UnixDateDeserializer extends JsonDeserializer<Date> {
 
     @Override
     public Date deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {

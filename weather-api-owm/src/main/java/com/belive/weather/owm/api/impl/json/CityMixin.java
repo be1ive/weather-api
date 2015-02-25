@@ -34,12 +34,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @version 2015/02/16
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class CityMixin extends OpenWeatherMapObjectMixin {
+abstract class CityMixin extends AbstractPlaceMixin {
 
-    @JsonCreator
-    CityMixin(
-            @JsonProperty("id") String id,
-            @JsonProperty("name") String name,
-            @JsonProperty("country") String country,
-            @JsonProperty("coord") Location location) {}
+    @JsonProperty("country")
+    String country;
+
 }

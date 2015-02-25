@@ -25,41 +25,37 @@
 package com.belive.weather.owm.api;
 
 /**
- * Defines operations for reading weather forecast for 5 days with data every 3 hours
- *
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public interface HourlyForecastOperations {
+public class Station extends AbstractPlace {
+
+    private String type;
+
+    private String status;
 
     /**
-     * Retrieves weather forecast by city name
-     * @param city City Name
-     * @return the requested {@link HourlyForecast}
+     * Station type
      */
-    HourlyForecast<City> forecastNearCityByCityName(String city);
+    public String getType() {
+        return type;
+    }
 
     /**
-     * Retrieves weather forecast by city name and country code
-     * @param city City Name
-     * @param country Country Code
-     * @return the requested {@link HourlyForecast}
+     * Station status
      */
-    HourlyForecast<City> forecastNearCityByCityAndCountryCode(String city, String country);
+    public String getStatus() {
+        return status;
+    }
 
-    /**
-     * Retrieves weather forecast by city id
-     * @param id City Id
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByCityId(String id);
-
-    /**
-     * Retrieves weather forecast by geographic coordinates
-     * @param lat Latitude
-     * @param lon Longitude
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByLatLon(double lat, double lon);
-
+    @Override
+    public String toString() {
+        return "Station{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

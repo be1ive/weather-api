@@ -24,16 +24,14 @@
 
 package com.belive.weather.owm.api.impl.json;
 
-import com.belive.weather.owm.api.AbstractWeather;
-import com.belive.weather.owm.api.City;
-import com.belive.weather.owm.api.CurrentConditions;
-import com.belive.weather.owm.api.CurrentWeather;
-import com.belive.weather.owm.api.DailyForecast;
-import com.belive.weather.owm.api.DailyWeather;
-import com.belive.weather.owm.api.HourlyForecast;
-import com.belive.weather.owm.api.Location;
-import com.belive.weather.owm.api.OpenWeatherMapObject;
+import com.belive.weather.owm.api.*;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+
+import java.io.IOException;
 
 /**
  * @author Nikolay Denisenko
@@ -52,12 +50,14 @@ public class OpenWeatherMapModule extends SimpleModule {
 
         context.setMixInAnnotations(OpenWeatherMapObject.class, OpenWeatherMapObjectMixin.class);
 
+        context.setMixInAnnotations(AbstractPlace.class, AbstractPlaceMixin.class);
         context.setMixInAnnotations(City.class, CityMixin.class);
+        context.setMixInAnnotations(Station.class, StationMixin.class);
         context.setMixInAnnotations(Location.class, LocationMixin.class);
 
         context.setMixInAnnotations(CurrentConditions.class, CurrentConditionsMixin.class);
         context.setMixInAnnotations(HourlyForecast.class, HourlyForecastMixin.class);
-        context.setMixInAnnotations(DailyForecast.class,DailyForecastMixin.class);
+        context.setMixInAnnotations(DailyForecast.class, DailyForecastMixin.class);
 
         context.setMixInAnnotations(AbstractWeather.class, AbstractWeatherMixin.class);
 

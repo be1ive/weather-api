@@ -37,7 +37,7 @@ import java.util.Date;
  * @version 2015/02/16
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CurrentWeatherMixin extends AbstractWeatherMixin {
+abstract class CurrentWeatherMixin extends AbstractWeatherMixin {
 
     @JsonProperty("wind")
     CurrentWeather.WindObject windObject;

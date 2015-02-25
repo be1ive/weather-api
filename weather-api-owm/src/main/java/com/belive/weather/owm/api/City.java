@@ -28,33 +28,9 @@ package com.belive.weather.owm.api;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class City extends OpenWeatherMapObject {
+public class City extends AbstractPlace {
 
-    private final String id;
-    private final String name;
-    private final String country;
-    private final Location location;
-
-    public City(String id, String name, String country, Location location) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.location = location;
-    }
-
-    /**
-     * 	City identification
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * 	City name
-     */
-    public String getName() {
-        return name;
-    }
+    private String country;
 
     /**
      * 	City country
@@ -63,20 +39,13 @@ public class City extends OpenWeatherMapObject {
         return country;
     }
 
-    /**
-     * 	City Geo location
-     */
-    public Location getLocation() {
-        return location;
-    }
-
     @Override
     public String toString() {
-        return "CityObject{" +
+        return "City{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
                 ", country='" + country + '\'' +
-                ", location=" + location +
                 '}';
     }
 }

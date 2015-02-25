@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
  * @version 2015/02/16
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DailyWeatherMixin extends AbstractWeatherMixin {
+abstract class DailyWeatherMixin extends AbstractWeatherMixin {
 
     @JsonUnwrapped
     DailyWeather.WindObject windObject;

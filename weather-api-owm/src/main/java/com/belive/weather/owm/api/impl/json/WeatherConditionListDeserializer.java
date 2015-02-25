@@ -41,7 +41,7 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class WeatherConditionListDeserializer extends JsonDeserializer<List<WeatherCondition>> {
+class WeatherConditionListDeserializer extends JsonDeserializer<List<WeatherCondition>> {
 
     @Override
     public List<WeatherCondition> deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {

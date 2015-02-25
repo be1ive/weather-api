@@ -30,11 +30,11 @@ import java.util.List;
 /**
  * Created by Nikolay on 14.02.2015.
  */
-public class AbstractWeather extends OpenWeatherMapObject {
+public abstract class AbstractWeather extends OpenWeatherMapObject {
 
-    private Date date;
+    protected Date date;
 
-    private List<WeatherCondition> conditions;
+    protected List<WeatherCondition> conditions;
 
     /**
      * 	Data receiving time, unix time, GMT

@@ -83,9 +83,21 @@ public class DailyWeather extends AbstractWeather {
         return temperatureObject;
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
+    @Override
+    public String toString() {
+        return "DailyWeather{" +
+                "date=" + date +
+                ", conditions=" + conditions +
+                ", mainObject=" + mainObject +
+                ", windObject=" + windObject +
+                ", cloudsObject=" + cloudsObject +
+                ", rainObject=" + rainObject +
+                ", snowObject=" + snowObject +
+                ", temperatureObject=" + temperatureObject +
+                '}';
+    }
+
+
     public static class MainObject extends OpenWeatherMapObject {
 
         private final Double humidity;
@@ -198,9 +210,6 @@ public class DailyWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class WindObject extends OpenWeatherMapObject {
 
         private final Double speed;
@@ -246,9 +255,6 @@ public class DailyWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class CloudsObject extends OpenWeatherMapObject {
 
         private final Double cloudiness;
@@ -272,9 +278,6 @@ public class DailyWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class SnowObject extends OpenWeatherMapObject {
 
         private final Double volume;
@@ -298,9 +301,6 @@ public class DailyWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class RainObject extends OpenWeatherMapObject {
 
         private final Double volume;

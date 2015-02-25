@@ -24,6 +24,8 @@
 
 package com.belive.weather.owm.api;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import org.springframework.util.MultiValueMap;
 
 /**
@@ -36,8 +38,8 @@ public interface OpenWeatherMapApi {
 
     static final String OWM_AUTH_PARAM = "APPID";
 
-    <T> T fetchObject(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters);
+    <T> T fetchObject(String objectName, JavaType type, MultiValueMap<String, String> queryParameters);
 
-    <T> ParametrisedList<T> fetchObjects(String objectName, Class<T> type, MultiValueMap<String, String> queryParameters);
+    <T> ParametrisedList<T> fetchObjects(String objectName, JavaType type, MultiValueMap<String, String> queryParameters);
 
 }

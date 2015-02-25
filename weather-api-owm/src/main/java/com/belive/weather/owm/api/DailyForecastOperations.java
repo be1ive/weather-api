@@ -37,7 +37,7 @@ public interface DailyForecastOperations {
      * @param city City Name
      * @return the requested {@link HourlyForecast}
      */
-    DailyForecast dailyForecastByCityName(String city);
+    DailyForecast<City> forecastNearCityByCityName(String city);
 
     /**
      * Retrieves weather forecast by city name and country code
@@ -45,14 +45,14 @@ public interface DailyForecastOperations {
      * @param country Country Code
      * @return the requested {@link HourlyForecast}
      */
-    DailyForecast dailyForecastByCityAndCountryCode(String city, String country);
+    DailyForecast<City> forecastNearCityByCityAndCountryCode(String city, String country);
 
     /**
      * Retrieves weather forecast by city id
      * @param id City Id
      * @return the requested {@link HourlyForecast}
      */
-    DailyForecast dailyForecastByCityId(String id);
+    DailyForecast<City> forecastNearCityByCityId(String id);
 
     /**
      * Retrieves weather forecast by geographic coordinates
@@ -60,6 +60,6 @@ public interface DailyForecastOperations {
      * @param lon Longitude
      * @return the requested {@link HourlyForecast}
      */
-    DailyForecast dailyForecastByLatLon(double lat, double lon);
+    DailyForecast<City> forecastNearCityByLatLon(double lat, double lon);
 
 }

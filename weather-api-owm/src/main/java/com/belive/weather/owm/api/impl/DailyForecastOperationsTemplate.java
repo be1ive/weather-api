@@ -24,9 +24,8 @@
 
 package com.belive.weather.owm.api.impl;
 
-import com.belive.weather.owm.api.DailyForecast;
-import com.belive.weather.owm.api.DailyForecastOperations;
-import com.belive.weather.owm.api.OpenWeatherMapApi;
+import com.belive.weather.owm.api.*;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -47,29 +46,32 @@ public class DailyForecastOperationsTemplate implements DailyForecastOperations 
     }
 
     @Override
-    public DailyForecast dailyForecastByCityName(String city) {
+    public DailyForecast<City> forecastNearCityByCityName(String city) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
-        return api.fetchObject("forecast/daily", DailyForecast.class, queryParams);
+        return api.fetchObject("forecast/daily", TypeFactory
+                .defaultInstance().constructType(DailyForecast.class, City.class), queryParams);
     }
 
     @Override
-    public DailyForecast dailyForecastByCityAndCountryCode(String city, String country) {
-        return dailyForecastByCityName(city + "," + country);
+    public DailyForecast forecastNearCityByCityAndCountryCode(String city, String country) {
+        return forecastNearCityByCityName(city + "," + country);
     }
 
     @Override
-    public DailyForecast dailyForecastByCityId(String id) {
+    public DailyForecast<City> forecastNearCityByCityId(String id) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
-        return api.fetchObject("forecast/daily", DailyForecast.class, queryParams);
+        return api.fetchObject("forecast/daily", TypeFactory
+                .defaultInstance().constructType(DailyForecast.class, City.class), queryParams);
     }
 
     @Override
-    public DailyForecast dailyForecastByLatLon(double lat, double lon) {
+    public DailyForecast<City> forecastNearCityByLatLon(double lat, double lon) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(lat));
         queryParams.set("lon", Double.toString(lon));
-        return api.fetchObject("forecast/daily", DailyForecast.class, queryParams);
+        return api.fetchObject("forecast/daily", TypeFactory
+                .defaultInstance().constructType(DailyForecast.class, City.class), queryParams);
     }
 }

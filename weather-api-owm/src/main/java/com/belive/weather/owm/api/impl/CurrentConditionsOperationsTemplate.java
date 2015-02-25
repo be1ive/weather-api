@@ -24,10 +24,9 @@
 
 package com.belive.weather.owm.api.impl;
 
-import com.belive.weather.owm.api.CurrentConditions;
-import com.belive.weather.owm.api.CurrentConditionsOperations;
-import com.belive.weather.owm.api.OpenWeatherMapApi;
-import com.belive.weather.owm.api.ParametrisedList;
+import com.belive.weather.owm.api.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -49,26 +48,26 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     }
 
     @Override
-    public CurrentConditions currentConditionsByCityName(String city) {
+    public CurrentConditions<City> conditionsNearCityByCityName(String city) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
-        return api.fetchObject("weather", CurrentConditions.class, queryParams);
+        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
     }
 
     @Override
-    public CurrentConditions currentConditionsByCityAndCountryCode(String city, String country) {
-        return currentConditionsByCityName(city + "," + country);
+    public CurrentConditions<City> conditionsNearCityByCityAndCountryCode(String city, String country) {
+        return conditionsNearCityByCityName(city + "," + country);
     }
 
     @Override
-    public CurrentConditions currentConditionsByCityId(String id) {
+    public CurrentConditions<City> conditionsNearCityByCityId(String id) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
-        return api.fetchObject("weather", CurrentConditions.class, queryParams);
+        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
     }
 
     @Override
-    public ParametrisedList<CurrentConditions> currentConditionsByCityIds(String... ids) {
+    public ParametrisedList<CurrentConditions<City>> conditionsNearCityByCityIds(String... ids) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         StringBuilder sb = new StringBuilder("");
         for (String id : ids) {
@@ -77,30 +76,31 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
         sb.deleteCharAt(0);
         queryParams.add("id", sb.toString());
 
-        return api.fetchObjects("group", CurrentConditions.class, queryParams);
+        return api.fetchObjects("group", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
     }
 
     @Override
-    public CurrentConditions currentConditionsByLatLon(double lat, double lon) {
+    public CurrentConditions<City> conditionsNearCityByLatLon(double lat, double lon) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(lat));
         queryParams.set("lon", Double.toString(lon));
-        return api.fetchObject("weather", CurrentConditions.class, queryParams);
+        return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
     }
 
     @Override
-    public ParametrisedList<CurrentConditions> currentConditionsInBox(double topLeftLat, double topLeftLon, double botRightLat, double botRightLon) {
+    public ParametrisedList<CurrentConditions<City>> conditionsNearCityInBox(double topLeftLat, double topLeftLon,
+            double botRightLat, double botRightLon) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("bbox", Double.toString(topLeftLat) + "," + Double.toString(topLeftLon) + "," + Double.toString(botRightLat) + "," + Double.toString(botRightLon));
-        return api.fetchObjects("box/city", CurrentConditions.class, queryParams);
+        return api.fetchObjects("box/city", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
     }
 
     @Override
-    public ParametrisedList<CurrentConditions> currentConditionsInCircle(double centrLat, double centrLon, int cnt) {
+    public ParametrisedList<CurrentConditions<City>> conditionsNearCityInCircle(double centrLat, double centrLon, int cnt) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(centrLat));
         queryParams.set("lon", Double.toString(centrLon));
         queryParams.set("count", cnt == 0 ? "1" : Integer.toString(cnt));
-        return api.fetchObjects("find", CurrentConditions.class, queryParams);
+        return api.fetchObjects("find", TypeFactory.defaultInstance().constructType(CurrentConditions.class, City.class), queryParams);
     }
 }

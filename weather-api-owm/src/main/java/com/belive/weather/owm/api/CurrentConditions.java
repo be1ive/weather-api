@@ -29,17 +29,17 @@ package com.belive.weather.owm.api;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class CurrentConditions extends OpenWeatherMapObject {
+public class CurrentConditions<T extends AbstractPlace> extends OpenWeatherMapObject {
 
-    private City city;
+    private T place;
 
     private CurrentWeather currentWeather;
 
     /**
-     * 	City Information
+     * 	Place Information
      */
-    public City getCity() {
-        return city;
+    public T getPlace() {
+        return place;
     }
 
     /**
@@ -52,7 +52,7 @@ public class CurrentConditions extends OpenWeatherMapObject {
     @Override
     public String toString() {
         return "CurrentWeather{" +
-                "city=" + city +
+                "place=" + place +
                 ", currentWeather=" + currentWeather +
                 '}';
     }

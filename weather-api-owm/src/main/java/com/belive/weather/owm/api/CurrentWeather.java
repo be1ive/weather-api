@@ -89,14 +89,17 @@ public class CurrentWeather extends AbstractWeather {
     @Override
     public String toString() {
         return "CurrentWeather{" +
-                "systemObject=" + systemObject +
+                "date=" + date +
+                ", conditions=" + conditions +
+                ", systemObject=" + systemObject +
                 ", mainObject=" + mainObject +
+                ", windObject=" + windObject +
+                ", cloudsObject=" + cloudsObject +
+                ", rainObject=" + rainObject +
+                ", snowObject=" + snowObject +
                 '}';
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class MainObject extends OpenWeatherMapObject {
 
         private final Double temperature;
@@ -186,9 +189,6 @@ public class CurrentWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class SystemObject extends OpenWeatherMapObject {
 
         private final String message;
@@ -245,9 +245,6 @@ public class CurrentWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class WindObject extends OpenWeatherMapObject {
 
         private final Double speed;
@@ -293,9 +290,6 @@ public class CurrentWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class CloudsObject extends OpenWeatherMapObject {
 
         private final Double cloudiness;
@@ -319,9 +313,6 @@ public class CurrentWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class SnowObject extends OpenWeatherMapObject {
 
         private final Double volume;
@@ -345,9 +336,6 @@ public class CurrentWeather extends AbstractWeather {
         }
     }
 
-    /**
-     * Created by Nikolay on 14.02.2015.
-     */
     public static class RainObject extends OpenWeatherMapObject {
 
         private final Double volume;

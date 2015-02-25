@@ -25,41 +25,10 @@
 package com.belive.weather.owm.api;
 
 /**
- * Defines operations for reading weather forecast for 5 days with data every 3 hours
+ * Defines operations for reading current weather conditions.
  *
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public interface HourlyForecastOperations {
-
-    /**
-     * Retrieves weather forecast by city name
-     * @param city City Name
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByCityName(String city);
-
-    /**
-     * Retrieves weather forecast by city name and country code
-     * @param city City Name
-     * @param country Country Code
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByCityAndCountryCode(String city, String country);
-
-    /**
-     * Retrieves weather forecast by city id
-     * @param id City Id
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByCityId(String id);
-
-    /**
-     * Retrieves weather forecast by geographic coordinates
-     * @param lat Latitude
-     * @param lon Longitude
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByLatLon(double lat, double lon);
-
+public interface HistoricalConditionsOperations {
 }

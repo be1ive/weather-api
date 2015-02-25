@@ -30,17 +30,17 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class HourlyForecast extends OpenWeatherMapObject {
+public class HourlyForecast<T extends AbstractPlace> extends OpenWeatherMapObject {
 
-    private City city;
+    private T place;
 
     private List<CurrentWeather> currentWeather;
 
     /**
      * 	City Information
      */
-    public City getCity() {
-        return city;
+    public T getPlace() {
+        return place;
     }
 
     /**
@@ -53,7 +53,7 @@ public class HourlyForecast extends OpenWeatherMapObject {
     @Override
     public String toString() {
         return "CurrentWeather{" +
-                "city=" + city +
+                "place=" + place +
                 ", currentWeather=" + currentWeather +
                 '}';
     }

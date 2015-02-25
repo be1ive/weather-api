@@ -22,44 +22,27 @@
  * SOFTWARE.
  */
 
-package com.belive.weather.owm.api;
+package com.belive.weather.owm.api.impl.json;
+
+import com.belive.weather.owm.api.Location;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Defines operations for reading weather forecast for 5 days with data every 3 hours
- *
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public interface HourlyForecastOperations {
+@JsonIgnoreProperties(ignoreUnknown = true)
+abstract class AbstractPlaceMixin extends OpenWeatherMapObjectMixin {
 
-    /**
-     * Retrieves weather forecast by city name
-     * @param city City Name
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByCityName(String city);
+    @JsonProperty("id")
+    String id;
 
-    /**
-     * Retrieves weather forecast by city name and country code
-     * @param city City Name
-     * @param country Country Code
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByCityAndCountryCode(String city, String country);
+    @JsonProperty("name")
+    String name;
 
-    /**
-     * Retrieves weather forecast by city id
-     * @param id City Id
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByCityId(String id);
-
-    /**
-     * Retrieves weather forecast by geographic coordinates
-     * @param lat Latitude
-     * @param lon Longitude
-     * @return the requested {@link HourlyForecast}
-     */
-    HourlyForecast<City> forecastNearCityByLatLon(double lat, double lon);
+    @JsonProperty("coord")
+    Location location;
 
 }

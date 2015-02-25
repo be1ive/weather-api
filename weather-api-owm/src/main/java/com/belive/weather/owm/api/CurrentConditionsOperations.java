@@ -38,7 +38,7 @@ public interface CurrentConditionsOperations {
      * @param city City Name
      * @return the requested {@link CurrentConditions}
      */
-    CurrentConditions currentConditionsByCityName(String city);
+    CurrentConditions<City> conditionsNearCityByCityName(String city);
 
     /**
      * Retrieves current weather conditions by city name and country code
@@ -46,21 +46,21 @@ public interface CurrentConditionsOperations {
      * @param country Country Code
      * @return the requested {@link CurrentConditions}
      */
-    CurrentConditions currentConditionsByCityAndCountryCode(String city, String country);
+    CurrentConditions<City> conditionsNearCityByCityAndCountryCode(String city, String country);
 
     /**
      * Retrieves current weather by city id
      * @param id City Id
      * @return the requested {@link CurrentConditions}
      */
-    CurrentConditions currentConditionsByCityId(String id);
+    CurrentConditions<City> conditionsNearCityByCityId(String id);
 
     /**
      * Retrieves current weather conditions for several city IDs
      * @param ids City Ids
      * @return the requested {@link ParametrisedList<CurrentConditions>}
      */
-    ParametrisedList<CurrentConditions> currentConditionsByCityIds(String... ids);
+    ParametrisedList<CurrentConditions<City>> conditionsNearCityByCityIds(String... ids);
 
     /**
      * Retrieves current weather conditions by geographic coordinates
@@ -68,7 +68,7 @@ public interface CurrentConditionsOperations {
      * @param lon Longitude
      * @return the requested {@link CurrentConditions}
      */
-    CurrentConditions currentConditionsByLatLon(double lat, double lon);
+    CurrentConditions<City> conditionsNearCityByLatLon(double lat, double lon);
 
     /**
      * Retrieves current weather conditions for cities within a rectangle zone
@@ -78,7 +78,8 @@ public interface CurrentConditionsOperations {
      * @param botRightLon Longitude of the bottom right point
      * @return the requested {@link ParametrisedList<CurrentConditions>}
      */
-    ParametrisedList<CurrentConditions> currentConditionsInBox(double topLeftLat, double topLeftLon, double botRightLat, double botRightLon);
+    ParametrisedList<CurrentConditions<City>> conditionsNearCityInBox(double topLeftLat, double topLeftLon,
+            double botRightLat, double botRightLon);
 
     /**
      * Retrieves current weather conditions for cities in cycle
@@ -87,6 +88,6 @@ public interface CurrentConditionsOperations {
      * @param cnt Expected number of points
      * @return the requested {@link ParametrisedList<CurrentConditions>}
      */
-    ParametrisedList<CurrentConditions> currentConditionsInCircle(double centrLat, double centrLon, int cnt);
+    ParametrisedList<CurrentConditions<City>> conditionsNearCityInCircle(double centrLat, double centrLon, int cnt);
 
 }

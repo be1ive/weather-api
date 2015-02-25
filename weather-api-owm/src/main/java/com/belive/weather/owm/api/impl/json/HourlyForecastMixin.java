@@ -24,6 +24,7 @@
 
 package com.belive.weather.owm.api.impl.json;
 
+import com.belive.weather.owm.api.AbstractPlace;
 import com.belive.weather.owm.api.City;
 import com.belive.weather.owm.api.CurrentWeather;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,10 +37,10 @@ import java.util.List;
  * @version 2015/02/16
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class HourlyForecastMixin extends OpenWeatherMapObjectMixin {
+class HourlyForecastMixin<T extends AbstractPlace> extends OpenWeatherMapObjectMixin {
 
     @JsonProperty("city")
-    City city;
+    T place;
 
     @JsonProperty("list")
     List<CurrentWeather> currentWeather;
