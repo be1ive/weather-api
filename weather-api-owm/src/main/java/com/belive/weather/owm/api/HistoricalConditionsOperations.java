@@ -24,6 +24,8 @@
 
 package com.belive.weather.owm.api;
 
+import java.util.Date;
+
 /**
  * Defines operations for reading city historical weather data and raw data from weather stations.
  *
@@ -37,7 +39,7 @@ public interface HistoricalConditionsOperations {
      * @param city City Name
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByNameInPeriod(String city, int start, int end);
+    HistoricalConditions<City> conditionsNearCityByNameInPeriod(String city, Date start, Date end);
 
     /**
      * Retrieves weather forecast by city name and country code
@@ -45,15 +47,14 @@ public interface HistoricalConditionsOperations {
      * @param country Country Code
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByNameAndCountryInPeriod(String city, String country, int start,
-            int end);
+    HistoricalConditions<City> conditionsNearCityByNameAndCountryInPeriod(String city, String country, Date start, Date end);
 
     /**
      * Retrieves weather forecast by city id
      * @param id City Id
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByIdInPeriod(String id, int start, int end);
+    HistoricalConditions<City> conditionsNearCityByIdInPeriod(String id, Date start, Date end);
 
     /**
      * Retrieves current weather conditions by geographic coordinates
@@ -61,14 +62,14 @@ public interface HistoricalConditionsOperations {
      * @param lon Longitude
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByLatLonInPeriod(double lat, double lon, int start, int end);
+    HistoricalConditions<City> conditionsNearCityByLatLonInPeriod(double lat, double lon, Date start, Date end);
 
     /**
      * Retrieves weather forecast by city name
      * @param city City Name
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByNameAtTime(String city, int start);
+    HistoricalConditions<City> conditionsNearCityByNameAtTime(String city, Date start);
 
     /**
      * Retrieves weather forecast by city name and country code
@@ -76,14 +77,14 @@ public interface HistoricalConditionsOperations {
      * @param country Country Code
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByNameAndCountryAtTime(String city, String country, int start);
+    HistoricalConditions<City> conditionsNearCityByNameAndCountryAtTime(String city, String country, Date start);
 
     /**
      * Retrieves weather forecast by city id
      * @param id City Id
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByIdAtTime(String id, int start);
+    HistoricalConditions<City> conditionsNearCityByIdAtTime(String id, Date start);
 
     /**
      * Retrieves current weather conditions by geographic coordinates
@@ -91,5 +92,5 @@ public interface HistoricalConditionsOperations {
      * @param lon Longitude
      * @return the requested {@link HistoricalConditions<City>}
      */
-    HistoricalConditions<City> conditionsNearCityByLatLonAtTime(double lat, double lon, int start);
+    HistoricalConditions<City> conditionsNearCityByLatLonAtTime(double lat, double lon, Date start);
 }
