@@ -75,5 +75,7 @@ public class OpenWeatherMapModule extends SimpleModule {
         context.setMixInAnnotations(DailyWeather.TemperatureObject.class, DailyWeatherMixin.TemperatureObjectMixin.class);
 
         context.setMixInAnnotations(HourlyWeather.class, CurrentWeatherMixin.class);
+
+        context.setMixInAnnotations(HistoricalWeather.class, CurrentWeatherMixin.class);
     }
 }

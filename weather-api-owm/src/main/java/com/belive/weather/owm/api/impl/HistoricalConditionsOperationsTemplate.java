@@ -85,11 +85,13 @@ public class HistoricalConditionsOperationsTemplate implements HistoricalConditi
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(lat));
         queryParams.set("lon", Double.toString(lon));
+        queryParams.set("start", Integer.toString(start));
         if (start <= end) {
             queryParams.set("end", Integer.toString(end));
         } else {
             queryParams.set("cnt", Integer.toString(1));
         }
+        queryParams.set("type", "hour");
         return api.fetchObject("history/city", TypeFactory.defaultInstance().constructType(HistoricalCityConditions.class), queryParams);
     }
 

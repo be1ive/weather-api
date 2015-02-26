@@ -16,6 +16,10 @@
     </modules>
 
     <properties>
+
+        <distribution.release.url>http://10.8.38.105:8081/nexus/content/repositories/releases/</distribution.release.url>
+        <distribution.snapshot.url>http://10.8.38.105:8081/nexus/content/repositories/snapshots/</distribution.snapshot.url>
+
         <java.version>1.7</java.version>
         <compile.encoding>UTF-8</compile.encoding>
 
@@ -28,6 +32,19 @@
         <maven-jar-plugin.version>2.5</maven-jar-plugin.version>
 
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>release</name>
+            <url>${distribution.release.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>snapshot</name>
+            <url>${distribution.snapshot.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>

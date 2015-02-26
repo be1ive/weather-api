@@ -36,8 +36,8 @@ public class OpenWeatherMapTest {
 
         HistoricalConditionsOperations hco = openWeatherMap.historicalConditionsOperations();
 
-        HistoricalConditions<City> historicalConditions = hco.conditionsNearCityByNameAtTime("Москва",
-                ((int) (System.currentTimeMillis() / 1000)) - 3600 * 24);
+        HistoricalConditions<City> historicalConditions = hco.conditionsNearCityByLatLonAtTime(37, -122,
+                1369728000);
         System.out.print(historicalConditions);
 
     }
