@@ -25,10 +25,71 @@
 package com.belive.weather.owm.api;
 
 /**
- * Defines operations for reading current weather conditions.
+ * Defines operations for reading city historical weather data and raw data from weather stations.
  *
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
 public interface HistoricalConditionsOperations {
+
+    /**
+     * Retrieves weather forecast by city name
+     * @param city City Name
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByNameInPeriod(String city, int start, int end);
+
+    /**
+     * Retrieves weather forecast by city name and country code
+     * @param city City Name
+     * @param country Country Code
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByNameAndCountryInPeriod(String city, String country, int start,
+            int end);
+
+    /**
+     * Retrieves weather forecast by city id
+     * @param id City Id
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByIdInPeriod(String id, int start, int end);
+
+    /**
+     * Retrieves current weather conditions by geographic coordinates
+     * @param lat Latitude
+     * @param lon Longitude
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByLatLonInPeriod(double lat, double lon, int start, int end);
+
+    /**
+     * Retrieves weather forecast by city name
+     * @param city City Name
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByNameAtTime(String city, int start);
+
+    /**
+     * Retrieves weather forecast by city name and country code
+     * @param city City Name
+     * @param country Country Code
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByNameAndCountryAtTime(String city, String country, int start);
+
+    /**
+     * Retrieves weather forecast by city id
+     * @param id City Id
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByIdAtTime(String id, int start);
+
+    /**
+     * Retrieves current weather conditions by geographic coordinates
+     * @param lat Latitude
+     * @param lon Longitude
+     * @return the requested {@link HistoricalConditions<City>}
+     */
+    HistoricalConditions<City> conditionsNearCityByLatLonAtTime(double lat, double lon, int start);
 }

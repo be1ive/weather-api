@@ -35,30 +35,30 @@ public interface DailyForecastOperations {
     /**
      * Retrieves weather forecast by city name
      * @param city City Name
-     * @return the requested {@link HourlyCityForecast}
+     * @return the requested {@link DailyForecast<City>}
      */
-    DailyForecast<City> forecastNearCityByCityName(String city);
+    DailyForecast<City> forecastNearCityByName(String city);
 
     /**
      * Retrieves weather forecast by city name and country code
      * @param city City Name
      * @param country Country Code
-     * @return the requested {@link HourlyCityForecast}
+     * @return the requested {@link DailyForecast<City>}
      */
-    DailyForecast<City> forecastNearCityByCityAndCountryCode(String city, String country);
+    DailyForecast<City> forecastNearCityByNameAndCountry(String city, String country);
 
     /**
      * Retrieves weather forecast by city id
      * @param id City Id
-     * @return the requested {@link HourlyCityForecast}
+     * @return the requested {@link DailyForecast<City>}
      */
-    DailyForecast<City> forecastNearCityByCityId(String id);
+    DailyForecast<City> forecastNearCityById(String id);
 
     /**
      * Retrieves weather forecast by geographic coordinates
      * @param lat Latitude
      * @param lon Longitude
-     * @return the requested {@link HourlyCityForecast}
+     * @return the requested {@link DailyForecast<City>}
      */
     DailyForecast<City> forecastNearCityByLatLon(double lat, double lon);
 

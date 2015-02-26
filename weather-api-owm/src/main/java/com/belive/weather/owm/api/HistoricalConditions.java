@@ -24,21 +24,22 @@
 
 package com.belive.weather.owm.api;
 
-import com.belive.weather.owm.api.impl.OpenWeatherMapTemplate;
+import java.util.List;
 
 /**
- * Created by Nikolay on 14.02.2015.
+ * @author Nikolay Denisenko
+ * @version 2015/02/16
  */
-public class OpenWeatherMapTest {
+public abstract class HistoricalConditions<T extends AbstractPlace> extends OpenWeatherMapObject {
 
-    public static void main (String args[]) {
-        OpenWeatherMap openWeatherMap = new OpenWeatherMapTemplate("dab15b81ad001128f8bd2621c5605b1c");
+    /**
+     * 	Place Information
+     */
+    public abstract T getPlace();
 
-        HistoricalConditionsOperations hco = openWeatherMap.historicalConditionsOperations();
+    /**
+     * 	Weather Information
+     */
+    public abstract List<HistoricalWeather> getHistoricalWeather();
 
-        HistoricalConditions<City> historicalConditions = hco.conditionsNearCityByNameAtTime("Москва",
-                ((int) (System.currentTimeMillis() / 1000)) - 3600 * 24);
-        System.out.print(historicalConditions);
-
-    }
 }

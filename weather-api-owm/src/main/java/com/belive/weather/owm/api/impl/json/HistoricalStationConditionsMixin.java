@@ -22,23 +22,29 @@
  * SOFTWARE.
  */
 
-package com.belive.weather.owm.api;
+package com.belive.weather.owm.api.impl.json;
 
-import com.belive.weather.owm.api.impl.OpenWeatherMapTemplate;
+import com.belive.weather.owm.api.City;
+import com.belive.weather.owm.api.HistoricalWeather;
+import com.belive.weather.owm.api.Station;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+
+import java.util.List;
+
 
 /**
- * Created by Nikolay on 14.02.2015.
+ * @author Nikolay Denisenko
+ * @version 2015/02/16
  */
-public class OpenWeatherMapTest {
+@JsonIgnoreProperties(ignoreUnknown = true)
+abstract class HistoricalStationConditionsMixin extends OpenWeatherMapObjectMixin {
 
-    public static void main (String args[]) {
-        OpenWeatherMap openWeatherMap = new OpenWeatherMapTemplate("dab15b81ad001128f8bd2621c5605b1c");
+    @JsonUnwrapped
+    Station place;
 
-        HistoricalConditionsOperations hco = openWeatherMap.historicalConditionsOperations();
+    @JsonProperty("list")
+    List<HistoricalWeather> historicalWeather;
 
-        HistoricalConditions<City> historicalConditions = hco.conditionsNearCityByNameAtTime("Москва",
-                ((int) (System.currentTimeMillis() / 1000)) - 3600 * 24);
-        System.out.print(historicalConditions);
-
-    }
 }

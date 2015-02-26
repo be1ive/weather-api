@@ -36,7 +36,7 @@ import java.util.List;
  * @version 2015/02/16
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class HourlyCityForecastMixin extends OpenWeatherMapObjectMixin {
+abstract class HourlyCityForecastMixin extends OpenWeatherMapObjectMixin {
 
     @JsonProperty("city")
     City place;

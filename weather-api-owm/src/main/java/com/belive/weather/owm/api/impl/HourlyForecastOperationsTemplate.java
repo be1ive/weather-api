@@ -50,7 +50,7 @@ public class HourlyForecastOperationsTemplate implements HourlyForecastOperation
     }
 
     @Override
-    public HourlyForecast<City> forecastNearCityByCityName(String city) {
+    public HourlyForecast<City> forecastNearCityByName(String city) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
         return api.fetchObject("forecast", TypeFactory
@@ -58,12 +58,12 @@ public class HourlyForecastOperationsTemplate implements HourlyForecastOperation
     }
 
     @Override
-    public HourlyForecast<City> forecastNearCityByCityAndCountryCode(String city, String country) {
-        return forecastNearCityByCityName(city + "," + country);
+    public HourlyForecast<City> forecastNearCityByNameAndCountry(String city, String country) {
+        return forecastNearCityByName(city + "," + country);
     }
 
     @Override
-    public HourlyForecast<City> forecastNearCityByCityId(String id) {
+    public HourlyForecast<City> forecastNearCityById(String id) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
         return api.fetchObject("forecast", TypeFactory

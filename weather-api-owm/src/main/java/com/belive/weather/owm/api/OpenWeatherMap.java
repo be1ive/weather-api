@@ -34,7 +34,10 @@ public interface OpenWeatherMap extends OpenWeatherMapApi, ApiConfigurations {
 
     CurrentConditionsOperations currentConditionsOperations();
 
+    HistoricalConditionsOperations historicalConditionsOperations();
+
     HourlyForecastOperations hourlyForecastOperations();
 
     DailyForecastOperations dailyForecastOperations();
+
 }

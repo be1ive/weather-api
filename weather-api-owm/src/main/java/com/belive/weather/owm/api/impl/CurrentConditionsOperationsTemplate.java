@@ -24,12 +24,7 @@
 
 package com.belive.weather.owm.api.impl;
 
-import com.belive.weather.owm.api.City;
-import com.belive.weather.owm.api.CurrentCityConditions;
-import com.belive.weather.owm.api.CurrentConditions;
-import com.belive.weather.owm.api.CurrentConditionsOperations;
-import com.belive.weather.owm.api.OpenWeatherMapApi;
-import com.belive.weather.owm.api.ParametrisedList;
+import com.belive.weather.owm.api.*;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -52,26 +47,26 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     }
 
     @Override
-    public CurrentConditions<City> conditionsNearCityByCityName(String city) {
+    public CurrentConditions<City> conditionsNearCityByName(String city) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
         return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 
     @Override
-    public CurrentConditions<City> conditionsNearCityByCityAndCountryCode(String city, String country) {
-        return conditionsNearCityByCityName(city + "," + country);
+    public CurrentConditions<City> conditionsNearCityByNameAndCountry(String city, String country) {
+        return conditionsNearCityByName(city + "," + country);
     }
 
     @Override
-    public CurrentConditions<City> conditionsNearCityByCityId(String id) {
+    public CurrentConditions<City> conditionsNearCityById(String id) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
         return api.fetchObject("weather", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
     }
 
     @Override
-    public ParametrisedList<CurrentConditions<City>> conditionsNearCityByCityIds(String... ids) {
+    public ParametrisedList<CurrentConditions<City>> conditionsNearCitiesByIds(String... ids) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         StringBuilder sb = new StringBuilder("");
         for (String id : ids) {
@@ -92,7 +87,7 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     }
 
     @Override
-    public ParametrisedList<CurrentConditions<City>> conditionsNearCityInBox(double topLeftLat, double topLeftLon,
+    public ParametrisedList<CurrentConditions<City>> conditionsNearCitiesInBox(double topLeftLat, double topLeftLon,
             double botRightLat, double botRightLon) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("bbox", Double.toString(topLeftLat) + "," + Double.toString(topLeftLon) + "," + Double.toString(botRightLat) + "," + Double.toString(botRightLon));
@@ -100,11 +95,19 @@ public class CurrentConditionsOperationsTemplate implements CurrentConditionsOpe
     }
 
     @Override
-    public ParametrisedList<CurrentConditions<City>> conditionsNearCityInCircle(double centrLat, double centrLon, int cnt) {
+    public ParametrisedList<CurrentConditions<City>> conditionsNearCitiesInCircle(double centrLat, double centrLon,
+            int cnt) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("lat", Double.toString(centrLat));
         queryParams.set("lon", Double.toString(centrLon));
         queryParams.set("count", cnt == 0 ? "1" : Integer.toString(cnt));
         return api.fetchObjects("find", TypeFactory.defaultInstance().constructType(CurrentCityConditions.class), queryParams);
+    }
+
+    @Override
+    public CurrentConditions<Station> conditionsNearStationById(String id) {
+        MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        queryParams.set("id", id);
+        return api.fetchObject("station", TypeFactory.defaultInstance().constructType(CurrentStationConditions.class), queryParams);
     }
 }

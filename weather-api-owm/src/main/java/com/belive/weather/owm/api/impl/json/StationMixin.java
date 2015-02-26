@@ -38,7 +38,7 @@ abstract class StationMixin extends AbstractPlaceMixin {
 
     @JsonCreator
     StationMixin(
-            @JsonProperty("id") String id,
+            @JsonProperty("station_id") String id,
             @JsonProperty("name") String name,
             @JsonProperty("coord") Location location,
             @JsonProperty("type") String type,

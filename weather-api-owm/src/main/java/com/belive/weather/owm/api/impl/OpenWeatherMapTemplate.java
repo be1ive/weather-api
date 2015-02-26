@@ -25,12 +25,7 @@
 package com.belive.weather.owm.api.impl;
 
 import com.belive.weather.AbstractApiConfigurations;
-import com.belive.weather.owm.api.CurrentConditionsOperations;
-import com.belive.weather.owm.api.DailyForecastOperations;
-import com.belive.weather.owm.api.HourlyForecastOperations;
-import com.belive.weather.owm.api.OpenWeatherMap;
-import com.belive.weather.owm.api.OpenWeatherMapErrorHandler;
-import com.belive.weather.owm.api.ParametrisedList;
+import com.belive.weather.owm.api.*;
 import com.belive.weather.owm.api.impl.json.OpenWeatherMapModule;
 import com.belive.weather.support.URIBuilder;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -57,6 +52,7 @@ import java.util.Map;
 public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements OpenWeatherMap {
 
     private CurrentConditionsOperations currentConditionsOperations;
+    private HistoricalConditionsOperations historicalConditionsOperations;
     private HourlyForecastOperations hourlyForecastOperations;
     private DailyForecastOperations dailyForecastOperations;
 
@@ -74,6 +70,11 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     @Override
     public CurrentConditionsOperations currentConditionsOperations() {
         return currentConditionsOperations;
+    }
+
+    @Override
+    public HistoricalConditionsOperations historicalConditionsOperations() {
+        return historicalConditionsOperations;
     }
 
     @Override
@@ -149,6 +150,7 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
 
     private void initOperations() {
         currentConditionsOperations = new CurrentConditionsOperationsTemplate(this, getRestTemplate());
+        historicalConditionsOperations = new HistoricalConditionsOperationsTemplate(this, getRestTemplate());
         hourlyForecastOperations = new HourlyForecastOperationsTemplate(this, getRestTemplate());
         dailyForecastOperations = new DailyForecastOperationsTemplate(this, getRestTemplate());
     }

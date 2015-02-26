@@ -50,7 +50,7 @@ public class DailyForecastOperationsTemplate implements DailyForecastOperations 
     }
 
     @Override
-    public DailyForecast<City> forecastNearCityByCityName(String city) {
+    public DailyForecast<City> forecastNearCityByName(String city) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("q", city);
         return api.fetchObject("forecast/daily", TypeFactory
@@ -58,12 +58,12 @@ public class DailyForecastOperationsTemplate implements DailyForecastOperations 
     }
 
     @Override
-    public DailyForecast forecastNearCityByCityAndCountryCode(String city, String country) {
-        return forecastNearCityByCityName(city + "," + country);
+    public DailyForecast forecastNearCityByNameAndCountry(String city, String country) {
+        return forecastNearCityByName(city + "," + country);
     }
 
     @Override
-    public DailyForecast<City> forecastNearCityByCityId(String id) {
+    public DailyForecast<City> forecastNearCityById(String id) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.set("id", id);
         return api.fetchObject("forecast/daily", TypeFactory

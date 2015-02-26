@@ -38,7 +38,7 @@ abstract class CityMixin extends AbstractPlaceMixin {
 
     @JsonCreator
     CityMixin(
-            @JsonProperty("id") String id,
+            @JsonProperty("city_id") String id,
             @JsonProperty("name") String name,
             @JsonProperty("coord") Location location,
             @JsonProperty("country") String country)

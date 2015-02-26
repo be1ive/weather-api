@@ -24,12 +24,37 @@
 
 package com.belive.weather.owm.api;
 
+import java.util.List;
+
 /**
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class HistoricalCityConditions {
+public class HistoricalCityConditions extends HistoricalConditions<City> {
 
     private City place;
 
+    private List<HistoricalWeather> historicalWeather;
+
+    /**
+     * 	City Information
+     */
+    public City getPlace() {
+        return place;
+    }
+
+    /**
+     * 	Weather Information
+     */
+    public List<HistoricalWeather> getHistoricalWeather() {
+        return historicalWeather;
+    }
+
+    @Override
+    public String toString() {
+        return "HistoricalCityConditions{" +
+                "place=" + place +
+                ", historicalWeather=" + historicalWeather +
+                '}';
+    }
 }
