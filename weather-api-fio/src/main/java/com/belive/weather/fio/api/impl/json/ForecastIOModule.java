@@ -44,6 +44,8 @@ public class ForecastIOModule extends SimpleModule {
 
         context.setMixInAnnotations(ForecastIOObject.class, ForecastIOObjectMixin.class);
 
+        context.setMixInAnnotations(ForecastWeather.class, ForecastWeatherMixin.class);
+
         context.setMixInAnnotations(AbstractWeatherPoint.class, AbstractWeatherPointMixin.class);
 
         context.setMixInAnnotations(CurrentlyWeatherPoint.class, CurrentlyWeatherPointMixin.class);

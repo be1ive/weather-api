@@ -30,9 +30,11 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class HourlyWeather extends Weather<HourlyWeatherPoint> {
+public class HourlyWeather extends Weather {
 
-    public HourlyWeather(String summary, String icon, List<HourlyWeatherPoint> data) {
-        super(summary, icon, data);
+    private List<HourlyWeatherPoint> data;
+
+    public List<HourlyWeatherPoint> getData() {
+        return data;
     }
 }

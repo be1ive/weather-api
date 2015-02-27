@@ -30,9 +30,11 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class CurrentlyWeather extends Weather<CurrentlyWeatherPoint> {
+public class CurrentlyWeather extends Weather {
 
-    public CurrentlyWeather(String summary, String icon, List<CurrentlyWeatherPoint> data) {
-        super(summary, icon, data);
+    private CurrentlyWeatherPoint data;
+
+    public CurrentlyWeatherPoint getData() {
+        return data;
     }
 }

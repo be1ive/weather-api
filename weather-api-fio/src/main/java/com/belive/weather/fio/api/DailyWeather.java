@@ -30,9 +30,11 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class DailyWeather extends Weather<DailyWeatherPoint> {
+public class DailyWeather extends Weather {
 
-    public DailyWeather(String summary, String icon, List<DailyWeatherPoint> data) {
-        super(summary, icon, data);
+    private List<DailyWeatherPoint> data;
+
+    public List<DailyWeatherPoint> getData() {
+        return data;
     }
 }

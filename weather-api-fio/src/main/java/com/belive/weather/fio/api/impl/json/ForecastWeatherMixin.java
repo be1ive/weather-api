@@ -24,11 +24,11 @@
 
 package com.belive.weather.fio.api.impl.json;
 
-import com.belive.weather.fio.api.CurrentlyWeather;
-import com.belive.weather.fio.api.DailyWeather;
-import com.belive.weather.fio.api.HourlyWeather;
+import com.belive.weather.fio.api.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 /**
  * @author Nikolay Denisenko
@@ -37,10 +37,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class ForecastWeatherMixin extends ForecastIOObjectMixin {
 
-    @JsonProperty("station")
+    @JsonProperty("latitude")
     private Double latitude;
 
-    @JsonProperty("station")
+    @JsonProperty("longitude")
     private Double longitude;
 
     @JsonProperty("offset")
@@ -50,12 +50,12 @@ abstract class ForecastWeatherMixin extends ForecastIOObjectMixin {
     private String timezone;
 
     @JsonProperty("currently")
-    private CurrentlyWeather currently;
+    private List<CurrentlyWeatherPoint> currently;
 
     @JsonProperty("hourly")
-    private HourlyWeather hourly;
+    private List<HourlyWeatherPoint> hourly;
 
     @JsonProperty("daily")
-    private DailyWeather daily;
+    private List<DailyWeatherPoint> daily;
 
 }

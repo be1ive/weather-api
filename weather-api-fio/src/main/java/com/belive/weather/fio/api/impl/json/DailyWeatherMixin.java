@@ -34,11 +34,8 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-abstract class DailyWeatherMixin extends ForecastIOObjectMixin {
+abstract class DailyWeatherMixin extends WeatherMixin {
 
-    @JsonCreator
-    DailyWeatherMixin(
-            @JsonProperty("summary") String summary,
-            @JsonProperty("icon") String icon,
-            @JsonProperty("data") List<DailyWeatherPoint> data) {}
+    @JsonProperty("data")
+    List<DailyWeatherPoint> data;
 }

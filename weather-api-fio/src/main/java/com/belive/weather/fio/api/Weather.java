@@ -30,19 +30,11 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class Weather<T extends AbstractWeatherPoint> {
+public class Weather {
 
-    private final String summary;
+    protected String summary;
 
-    private final String icon;
-
-    private final List<T> data;
-
-    public Weather(String summary, String icon, List<T> data) {
-        this.summary = summary;
-        this.icon = icon;
-        this.data = data;
-    }
+    protected String icon;
 
     //A human-readable text summary of this data block.
     public String getSummary() {
@@ -54,17 +46,12 @@ public class Weather<T extends AbstractWeatherPoint> {
         return icon;
     }
 
-    //An array of data point objects (see above), ordered by time, which together describe the weather conditions at the requested location over time.
-    public List<T> getData() {
-        return data;
-    }
 
     @Override
     public String toString() {
         return "Weather{" +
                 "summary='" + summary + '\'' +
                 ", icon='" + icon + '\'' +
-                ", data=" + data +
                 '}';
     }
 }

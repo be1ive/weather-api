@@ -24,19 +24,18 @@
 
 package com.belive.weather.fio.api.impl.json;
 
-import com.belive.weather.fio.api.HourlyWeatherPoint;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.List;
 
 /**
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-abstract class HourlyWeatherMixin extends WeatherMixin {
+abstract class WeatherMixin extends ForecastIOObjectMixin {
 
-    @JsonProperty("data")
-    List<HourlyWeatherPoint> data;
+    @JsonProperty("summary")
+    String summary;
+
+    @JsonProperty("icon")
+    String icon;
 
 }

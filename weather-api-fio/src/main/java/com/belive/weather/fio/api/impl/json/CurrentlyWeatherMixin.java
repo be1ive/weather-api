@@ -27,6 +27,7 @@ package com.belive.weather.fio.api.impl.json;
 import com.belive.weather.fio.api.CurrentlyWeatherPoint;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import java.util.List;
 
@@ -34,11 +35,9 @@ import java.util.List;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-abstract class CurrentlyWeatherMixin extends ForecastIOObjectMixin {
+abstract class CurrentlyWeatherMixin extends WeatherMixin {
 
-    @JsonCreator
-    CurrentlyWeatherMixin(
-            @JsonProperty("summary") String summary,
-            @JsonProperty("icon") String icon,
-            @JsonProperty("data") List<CurrentlyWeatherPoint> data) {}
+    @JsonUnwrapped
+    CurrentlyWeatherPoint data;
+
 }
