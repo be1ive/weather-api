@@ -26,6 +26,7 @@ package com.belive.weather.fio.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
 
@@ -37,6 +38,7 @@ abstract class DailyWeatherPointMixin extends AbstractWeatherPointMixin {
 
     @JsonCreator
     DailyWeatherPointMixin(
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("time") Date time,
             @JsonProperty("summary") String summary,
             @JsonProperty("icon") String icon,
@@ -51,19 +53,26 @@ abstract class DailyWeatherPointMixin extends AbstractWeatherPointMixin {
             @JsonProperty("pressure") Double pressure,
             @JsonProperty("visibility") Double visibility,
             @JsonProperty("ozone") Double ozone,
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("sunriseTime") Date sunriseTime,
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("sunsetTime") Date sunsetTime,
             @JsonProperty("moonPhase") Double moonPhase,
             @JsonProperty("precipIntensityMax") Double precipIntensityMax,
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("precipIntensityMaxTime") Date precipIntensityMaxTime,
             @JsonProperty("precipAccumulation") Double precipAccumulation,
             @JsonProperty("temperatureMin") Double temperatureMin,
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("temperatureMinTime") Date temperatureMinTime,
             @JsonProperty("temperatureMax") Double temperatureMax,
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("temperatureMaxTime") Date temperatureMaxTime,
             @JsonProperty("apparentTemperatureMin") Double apparentTemperatureMin,
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("apparentTemperatureMinTime") Date apparentTemperatureMinTime,
             @JsonProperty("apparentTemperatureMax") Double apparentTemperatureMax,
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("apparentTemperatureMaxTime") Date apparentTemperatureMaxTime)
     {
         super(time, summary, icon, precipProbability, precipType, precipIntensity, dewPoint, windSpeed, windBearing,

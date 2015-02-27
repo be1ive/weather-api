@@ -26,6 +26,7 @@ package com.belive.weather.fio.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
 
@@ -37,6 +38,7 @@ abstract class CurrentlyWeatherPointMixin extends AbstractWeatherPointMixin {
 
     @JsonCreator
     CurrentlyWeatherPointMixin(
+            @JsonDeserialize(using = UnixDateDeserializer.class)
             @JsonProperty("time") Date time,
             @JsonProperty("summary") String summary,
             @JsonProperty("icon") String icon,

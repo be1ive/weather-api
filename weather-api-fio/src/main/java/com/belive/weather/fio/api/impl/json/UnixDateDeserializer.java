@@ -24,35 +24,28 @@
 
 package com.belive.weather.fio.api.impl.json;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-abstract class AbstractWeatherPointMixin {
+class UnixDateDeserializer extends JsonDeserializer<Date> {
 
-    @JsonCreator
-    AbstractWeatherPointMixin(
-            @JsonDeserialize(using = UnixDateDeserializer.class)
-            @JsonProperty("time") Date time,
-            @JsonProperty("summary") String summary,
-            @JsonProperty("icon") String icon,
-            @JsonProperty("precipProbability") String precipProbability,
-            @JsonProperty("precipType") String precipType,
-            @JsonProperty("precipIntensity") Double precipIntensity,
-            @JsonProperty("dewPoint") Double dewPoint,
-            @JsonProperty("windSpeed") Double windSpeed,
-            @JsonProperty("windBearing") Double windBearing,
-            @JsonProperty("cloudCover") Double cloudCover,
-            @JsonProperty("humidity") Double humidity,
-            @JsonProperty("pressure") Double pressure,
-            @JsonProperty("visibility") Double visibility,
-            @JsonProperty("ozone") Double ozone) {}
+    @Override
+    public Date deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
+        String timestamp = jsonParser.getText().trim();
 
+        try {
+            return new Date(Long.valueOf(timestamp + "000"));
+        } catch (NumberFormatException e) {
+            throw new IOException("Can't parse unix date json node", e);
+        }
+    }
 
 }
