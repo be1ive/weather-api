@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.belive.weather.support;
 
 import org.springframework.util.LinkedMultiValueMap;
@@ -34,7 +35,10 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * @author Nikolay Denisenko
+ * @version 2015/02/16
+ */
 public class URIBuilder {
 
     private static final Pattern URI_PARAM_PATTERN = Pattern.compile("\\$([^/]+?)\\$");

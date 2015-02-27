@@ -24,8 +24,8 @@
 package com.belive.weather.support;
 
 /**
- * Exception thrown when URIBuilder can't build the specified URI. For the underlying reason, call getCause().
- * @author Craig Walls
+ * @author Nikolay Denisenko
+ * @version 2015/02/16
  */
 @SuppressWarnings("serial")
 public class URIBuilderException extends RuntimeException {

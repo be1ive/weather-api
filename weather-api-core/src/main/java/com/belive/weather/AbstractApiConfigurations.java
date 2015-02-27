@@ -24,7 +24,6 @@
 
 package com.belive.weather;
 
-import com.belive.weather.auth.AuthQueryParameterRequestInterceptor;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.HttpMessageConverter;
