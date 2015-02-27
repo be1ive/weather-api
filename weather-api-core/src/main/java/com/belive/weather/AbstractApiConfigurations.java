@@ -24,7 +24,7 @@
 
 package com.belive.weather;
 
-import com.belive.weather.auth.AuthTokenParameterRequestInterceptor;
+import com.belive.weather.auth.AuthQueryParameterRequestInterceptor;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -48,14 +48,25 @@ public abstract class AbstractApiConfigurations implements ApiConfigurations {
     private final RestTemplate restTemplate;
 
     public AbstractApiConfigurations() {
-        this(null, null);
-    }
-
-    public AbstractApiConfigurations(String parameterName, String accessToken) {
-        this.parameterName = parameterName;
-        this.accessToken = accessToken;
+        accessToken = null;
+        parameterName = null;
         this.restTemplate = createRestTemplate();
         configureRestTemplate(restTemplate);
+    }
+
+    public AbstractApiConfigurations(String accessToken, String parameterName, AuthStrategy authStrategy) {
+        this.parameterName = parameterName;
+        this.accessToken = accessToken;
+        this.restTemplate = createRestTemplate(authStrategy);
+        configureRestTemplate(restTemplate);
+    }
+
+    public AbstractApiConfigurations(String accessToken, String parameterName) {
+        this(parameterName, accessToken, AuthStrategy.AUTHORIZATION_QUERY_PARAMETER);
+    }
+
+    public AbstractApiConfigurations(String accessToken) {
+        this(accessToken, null, AuthStrategy.AUTHORIZATION_QUERY_PARAMETER);
     }
 
     public RestTemplate getRestTemplate() {
@@ -79,14 +90,20 @@ public abstract class AbstractApiConfigurations implements ApiConfigurations {
         return new MappingJackson2HttpMessageConverter();
     }
 
-    private RestTemplate createRestTemplate() {
-        List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
-        RestTemplate template = new RestTemplate(messageConverters);
+    private RestTemplate createRestTemplate(AuthStrategy authStrategy) {
+        RestTemplate template = createRestTemplate();
 
-        ClientHttpRequestInterceptor interceptor = new AuthTokenParameterRequestInterceptor(parameterName, accessToken);
+        ClientHttpRequestInterceptor interceptor = authStrategy.interceptor(parameterName, accessToken);
         List<ClientHttpRequestInterceptor> interceptors = new LinkedList<>();
         interceptors.add(interceptor);
         template.setInterceptors(interceptors);
+
+        return template;
+    }
+
+    private RestTemplate createRestTemplate() {
+        List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
+        RestTemplate template = new RestTemplate(messageConverters);
 
         return template;
     }

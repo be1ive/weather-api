@@ -38,19 +38,21 @@ import java.net.URI;
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class AuthTokenParameterRequestInterceptor implements ClientHttpRequestInterceptor {
+public class AuthQueryParameterRequestInterceptor implements ClientHttpRequestInterceptor {
+
+    private static final String DEFAULT_PARAM_NAME = "access_token";
 
     private final String parameterName;
 
     private final String accessToken;
 
-    public AuthTokenParameterRequestInterceptor(String parameterName, String accessToken) {
-        this.parameterName = parameterName;
+    public AuthQueryParameterRequestInterceptor(String accessToken, String parameterName) {
         this.accessToken = accessToken;
+        this.parameterName = parameterName == null ? DEFAULT_PARAM_NAME : parameterName;
     }
 
-    public AuthTokenParameterRequestInterceptor(String accessToken) {
-        this("access_token", accessToken);
+    public AuthQueryParameterRequestInterceptor(String accessToken) {
+        this(accessToken, DEFAULT_PARAM_NAME);
     }
 
     @Override

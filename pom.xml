@@ -13,6 +13,7 @@
     <modules>
         <module>weather-api-core</module>
         <module>weather-api-owm</module>
+        <module>weather-api-fio</module>
     </modules>
 
     <properties>

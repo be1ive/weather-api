@@ -30,24 +30,24 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-/**
- * Builds up a URI from individual URI components. Ensures that query parameters are application/x-www-form-urlencoded.
- * @author Craig Walls
- */
+
 public class URIBuilder {
+
+    private static final Pattern URI_PARAM_PATTERN = Pattern.compile("\\$([^/]+?)\\$");
 
     private final String baseUri;
 
-    private MultiValueMap<String, String> parameters;
+    private MultiValueMap<String, String> queryParameters;
+    private MultiValueMap<String, String> uriParameters;
 
     private URIBuilder(String baseUri) {
         this.baseUri = baseUri;
-        parameters = new LinkedMultiValueMap<String, String>();
+        queryParameters = new LinkedMultiValueMap<>();
+        uriParameters = new LinkedMultiValueMap<>();
     }
 
     /**
@@ -69,23 +69,44 @@ public class URIBuilder {
     }
 
     /**
+     * Adds a uri parameters to the URI
+     * @param name the parameter name
+     * @param value the parameter value
+     * @return the URIBuilder
+     */
+    public URIBuilder uriParameter(String name, String value) {
+        uriParameters.add(name, value);
+        return this;
+    }
+
+    /**
+     * Adds a uri parameters to the URI
+     * @param params a Map of uriParameters to add the the URI
+     * @return the URIBuilder
+     */
+    public URIBuilder uriParameters(MultiValueMap<String, String> params) {
+        uriParameters.putAll(params);
+        return this;
+    }
+
+    /**
      * Adds a query parameter to the URI
      * @param name the parameter name
      * @param value the parameter value
      * @return the URIBuilder
      */
     public URIBuilder queryParam(String name, String value) {
-        parameters.add(name, value);
+        queryParameters.add(name, value);
         return this;
     }
 
     /**
-     * Adds a query parameters to the URI
-     * @param params a Map of parameters to add the the URI
+     * Adds a query queryParameters to the URI
+     * @param params a Map of queryParameters to add the the URI
      * @return the URIBuilder
      */
     public URIBuilder queryParams(MultiValueMap<String, String> params) {
-        parameters.putAll(params);
+        queryParameters.putAll(params);
         return this;
     }
 
@@ -94,33 +115,78 @@ public class URIBuilder {
      * @return the URI
      */
     public URI build() {
+        URI uri = applyUriParams(baseUri.toString());
+        uri = applyQueryParams(uri.toString());
+        return uri;
+    }
+
+    private URI applyQueryParams(String url) {
         try {
-            StringBuilder builder = new StringBuilder();
-            Set<Map.Entry<String, List<String>>> entrySet = parameters.entrySet();
+            StringBuffer sb = new StringBuffer();
+            Set<Map.Entry<String, List<String>>> entrySet = queryParameters.entrySet();
             for (Iterator<Map.Entry<String, List<String>>> entryIt = entrySet.iterator(); entryIt.hasNext();) {
                 Map.Entry<String, List<String>> entry = entryIt.next();
                 String name = entry.getKey();
                 List<String> values = entry.getValue();
                 for(Iterator<String> valueIt = values.iterator(); valueIt.hasNext();) {
                     String value = valueIt.next();
-                    builder.append(formEncode(name)).append("=");
+                    sb.append(formEncode(name)).append("=");
                     if(value != null) {
-                        builder.append(formEncode(value));
+                        sb.append(formEncode(value));
                     }
                     if(valueIt.hasNext()) {
-                        builder.append("&");
+                        sb.append("&");
                     }
                 }
                 if(entryIt.hasNext()) {
-                    builder.append("&");
+                    sb.append("&");
                 }
             }
 
             String queryDelimiter = "?";
-            if(URI.create(baseUri).getQuery() != null) {
+            if(URI.create(url).getQuery() != null) {
                 queryDelimiter = "&";
             }
-            return new URI(baseUri + (builder.length() > 0 ? queryDelimiter + builder.toString() : ""));
+
+            return new URI(url + (sb.length() > 0 ? queryDelimiter + sb.toString() : ""));
+
+        } catch (URISyntaxException e) {
+            throw new URIBuilderException("Unable to build URI: Bad URI syntax", e);
+        }
+    }
+
+    private URI applyUriParams(String url) {
+        try {
+            if (url.indexOf('$') != -1) {
+                StringBuffer uri = new StringBuffer();
+
+                Matcher matcher = URI_PARAM_PATTERN.matcher(url);
+
+                while (matcher.find()) {
+                    String name = matcher.group(1);
+                    List<String> values = uriParameters.get(name);
+                    if (values != null) {
+                        StringBuffer sb = new StringBuffer();
+                        for (Iterator<String> valueIt = values.iterator(); valueIt.hasNext(); ) {
+                            String value = valueIt.next();
+                            if (value != null) {
+                                sb.append(formEncode(value));
+                            }
+                            if (valueIt.hasNext()) {
+                                sb.append(",");
+                            }
+                        }
+
+                        String replacement = Matcher.quoteReplacement(sb.toString());
+                        matcher.appendReplacement(uri, replacement);
+                    }
+                }
+                matcher.appendTail(uri);
+
+                return new URI(uri.toString());
+            }
+
+            return new URI(url);
         } catch (URISyntaxException e) {
             throw new URIBuilderException("Unable to build URI: Bad URI syntax", e);
         }
@@ -130,8 +196,8 @@ public class URIBuilder {
         try {
             return URLEncoder.encode(data, "UTF-8");
         }
-        catch (UnsupportedEncodingException wontHappen) {
-            throw new IllegalStateException(wontHappen);
+        catch (UnsupportedEncodingException e) {
+            throw new IllegalStateException(e);
         }
     }
 }

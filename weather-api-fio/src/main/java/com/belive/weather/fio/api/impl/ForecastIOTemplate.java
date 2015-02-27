@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 
-package com.belive.weather.owm.api.impl;
+package com.belive.weather.fio.api.impl;
 
 import com.belive.weather.AbstractApiConfigurations;
 import com.belive.weather.AuthStrategy;
-import com.belive.weather.owm.api.*;
-import com.belive.weather.owm.api.impl.json.OpenWeatherMapModule;
+import com.belive.weather.fio.api.ForecastIO;
+import com.belive.weather.fio.api.ForecastIOErrorHandler;
+import com.belive.weather.fio.api.ForecastOperations;
+import com.belive.weather.fio.api.impl.json.ForecastIOModule;
 import com.belive.weather.support.URIBuilder;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,63 +42,42 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Nikolay Denisenko
  * @version 2015/02/16
  */
-public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements OpenWeatherMap {
+public class ForecastIOTemplate extends AbstractApiConfigurations implements ForecastIO {
 
-    private CurrentConditionsOperations currentConditionsOperations;
-    private HistoricalConditionsOperations historicalConditionsOperations;
-    private HourlyForecastOperations hourlyForecastOperations;
-    private DailyForecastOperations dailyForecastOperations;
+    private ForecastOperations forecastOperations;
 
     private ObjectMapper objectMapper;
 
-    public OpenWeatherMapTemplate() {
+    public ForecastIOTemplate() {
         initialize();
     }
 
-    public OpenWeatherMapTemplate(String accessToken) {
-        super(accessToken, OWM_AUTH_PARAM, AuthStrategy.AUTHORIZATION_QUERY_PARAMETER);
+    public ForecastIOTemplate(String accessToken) {
+        super(accessToken, FIO_AUTH_PARAM, AuthStrategy.AUTHORIZATION_URI_PARAMETER);
         initialize();
     }
 
     @Override
-    public CurrentConditionsOperations currentConditionsOperations() {
-        return currentConditionsOperations;
+    public ForecastOperations forecastOperations() {
+        return forecastOperations;
     }
 
     @Override
-    public HistoricalConditionsOperations historicalConditionsOperations() {
-        return historicalConditionsOperations;
-    }
-
-    @Override
-    public HourlyForecastOperations hourlyForecastOperations() {
-        return hourlyForecastOperations;
-    }
-
-    @Override
-    public DailyForecastOperations dailyForecastOperations() {
-        return dailyForecastOperations;
-    }
-
-    @Override
-    public <T> T fetchObject(String objectName, JavaType type, MultiValueMap<String, String> queryParameters) {
-        String uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
+    public <T> T fetchObject(String objectName, JavaType type, MultiValueMap<String, String> uriParameters) {
+        URI uri = URIBuilder.fromUri(FIO_API_URL + "/" + objectName).uriParameters(uriParameters).build();
         JsonNode jsonNode = getRestTemplate().getForObject(uri, JsonNode.class);
         return entry(type, jsonNode);
     }
 
     @Override
-    public <T> ParametrisedList<T> fetchObjects(String objectName, JavaType type, MultiValueMap<String, String> queryParameters) {
-        String uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
+    public <T> List<T> fetchObjects(String objectName, JavaType type, MultiValueMap<String, String> uriParameters) {
+        URI uri = URIBuilder.fromUri(FIO_API_URL + "/" + objectName).uriParameters(uriParameters).build();
         JsonNode jsonNode = getRestTemplate().getForObject(uri, JsonNode.class);
         return list(type, jsonNode);
     }
@@ -110,16 +90,9 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
         }
     }
 
-    private <T> ParametrisedList<T> list(JavaType type, JsonNode jsonNode) {
+    private <T> List<T> list(JavaType type, JsonNode jsonNode) {
         List<T> list = deserializeList(jsonNode.get("list"), type);
-        Map<String, String> params = new HashMap<>();
-        for (Iterator<Map.Entry<String, JsonNode>> itr = jsonNode.fields(); itr.hasNext();) {
-            Map.Entry<String, JsonNode> entry = itr.next();
-            if (!entry.getKey().equals("list")) {
-                params.put(entry.getKey(), entry.getValue().asText());
-            }
-        }
-        return new ParametrisedList<T>(list, params);
+        return new ArrayList<>(list);
     }
 
     private <T> List<T> deserializeList(JsonNode jsonNode, final JavaType elementType) {
@@ -135,14 +108,14 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
         MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
         objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new OpenWeatherMapModule());
+        objectMapper.registerModule(new ForecastIOModule());
         converter.setObjectMapper(objectMapper);
         return converter;
     }
 
     @Override
     protected void configureRestTemplate(RestTemplate restTemplate) {
-        restTemplate.setErrorHandler(new OpenWeatherMapErrorHandler());
+        restTemplate.setErrorHandler(new ForecastIOErrorHandler());
     }
 
     private void initialize() {
@@ -150,9 +123,6 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
     }
 
     private void initOperations() {
-        currentConditionsOperations = new CurrentConditionsOperationsTemplate(this, getRestTemplate());
-        historicalConditionsOperations = new HistoricalConditionsOperationsTemplate(this, getRestTemplate());
-        hourlyForecastOperations = new HourlyForecastOperationsTemplate(this, getRestTemplate());
-        dailyForecastOperations = new DailyForecastOperationsTemplate(this, getRestTemplate());
+        forecastOperations = new ForecastOperationsTemplate(this, getRestTemplate());
     }
 }
