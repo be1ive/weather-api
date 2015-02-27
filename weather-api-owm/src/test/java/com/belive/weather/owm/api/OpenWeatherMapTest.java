@@ -26,6 +26,8 @@ package com.belive.weather.owm.api;
 
 import com.belive.weather.owm.api.impl.OpenWeatherMapTemplate;
 
+import java.util.Date;
+
 /**
  * Created by Nikolay on 14.02.2015.
  */
@@ -36,8 +38,8 @@ public class OpenWeatherMapTest {
 
         HistoricalConditionsOperations hco = openWeatherMap.historicalConditionsOperations();
 
-        HistoricalConditions<City> historicalConditions = hco.conditionsNearCityByLatLonAtTime(37, -122,
-                1369728000);
+        HistoricalConditions<City> historicalConditions = hco.conditionsNearCityByIdAtTime("5381421",
+                new Date(1414986653*1000));
         System.out.print(historicalConditions);
 
     }
