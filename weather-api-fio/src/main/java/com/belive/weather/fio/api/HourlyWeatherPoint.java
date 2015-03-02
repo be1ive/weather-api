@@ -48,4 +48,16 @@ public class HourlyWeatherPoint extends AbstractWeatherPoint {
         this.temperature = temperature;
         this.apparentTemperature = apparentTemperature;
     }
+
+    public Double precipAccumulation() {
+        return precipAccumulation;
+    }
+
+    public Double temperature() {
+        return temperature;
+    }
+
+    public Double apparentTemperature() {
+        return apparentTemperature;
+    }
 }

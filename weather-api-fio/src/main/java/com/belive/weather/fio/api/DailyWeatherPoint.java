@@ -84,4 +84,60 @@ public class DailyWeatherPoint extends AbstractWeatherPoint {
         this.apparentTemperatureMax = apparentTemperatureMax;
         this.apparentTemperatureMaxTime = apparentTemperatureMaxTime;
     }
+
+    public Date sunriseTime() {
+        return sunriseTime;
+    }
+
+    public Date sunsetTime() {
+        return sunsetTime;
+    }
+
+    public Double moonPhase() {
+        return moonPhase;
+    }
+
+    public Double precipIntensityMax() {
+        return precipIntensityMax;
+    }
+
+    public Date precipIntensityMaxTime() {
+        return precipIntensityMaxTime;
+    }
+
+    public Double precipAccumulation() {
+        return precipAccumulation;
+    }
+
+    public Double temperatureMin() {
+        return temperatureMin;
+    }
+
+    public Date temperatureMinTime() {
+        return temperatureMinTime;
+    }
+
+    public Double temperatureMax() {
+        return temperatureMax;
+    }
+
+    public Date temperatureMaxTime() {
+        return temperatureMaxTime;
+    }
+
+    public Double apparentTemperatureMin() {
+        return apparentTemperatureMin;
+    }
+
+    public Date apparentTemperatureMinTime() {
+        return apparentTemperatureMinTime;
+    }
+
+    public Double apparentTemperatureMax() {
+        return apparentTemperatureMax;
+    }
+
+    public Date getApparentTemperatureMaxTime() {
+        return apparentTemperatureMaxTime;
+    }
 }

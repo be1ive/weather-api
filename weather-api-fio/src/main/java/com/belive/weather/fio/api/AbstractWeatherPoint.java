@@ -78,4 +78,60 @@ public abstract class AbstractWeatherPoint {
         this.visibility = visibility;
         this.ozone = ozone;
     }
+
+    public Date time() {
+        return time;
+    }
+
+    public String summary() {
+        return summary;
+    }
+
+    public String icon() {
+        return icon;
+    }
+
+    public String precipProbability() {
+        return precipProbability;
+    }
+
+    public String precipType() {
+        return precipType;
+    }
+
+    public Double precipIntensity() {
+        return precipIntensity;
+    }
+
+    public Double dewPoint() {
+        return dewPoint;
+    }
+
+    public Double windSpeed() {
+        return windSpeed;
+    }
+
+    public Double windBearing() {
+        return windBearing;
+    }
+
+    public Double cloudCover() {
+        return cloudCover;
+    }
+
+    public Double humidity() {
+        return humidity;
+    }
+
+    public Double pressure() {
+        return pressure;
+    }
+
+    public Double visibility() {
+        return visibility;
+    }
+
+    public Double ozone() {
+        return ozone;
+    }
 }

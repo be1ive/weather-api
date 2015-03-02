@@ -52,4 +52,20 @@ public class CurrentlyWeatherPoint extends AbstractWeatherPoint {
         this.temperature = temperature;
         this.apparentTemperature = apparentTemperature;
     }
+
+    public Double nearestStormBearing() {
+        return nearestStormBearing;
+    }
+
+    public Double nearestStormDistance() {
+        return nearestStormDistance;
+    }
+
+    public Double temperature() {
+        return temperature;
+    }
+
+    public Double apparentTemperature() {
+        return apparentTemperature;
+    }
 }
