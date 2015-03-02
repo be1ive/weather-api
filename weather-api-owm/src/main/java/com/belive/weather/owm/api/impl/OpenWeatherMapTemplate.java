@@ -90,14 +90,14 @@ public class OpenWeatherMapTemplate extends AbstractApiConfigurations implements
 
     @Override
     public <T> T fetchObject(String objectName, JavaType type, MultiValueMap<String, String> queryParameters) {
-        String uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
+        URI uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
         JsonNode jsonNode = getRestTemplate().getForObject(uri, JsonNode.class);
         return entry(type, jsonNode);
     }
 
     @Override
     public <T> ParametrisedList<T> fetchObjects(String objectName, JavaType type, MultiValueMap<String, String> queryParameters) {
-        String uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
+        URI uri = URIBuilder.fromUri(OWM_API_URL + "/" + objectName).queryParams(queryParameters).build();
         JsonNode jsonNode = getRestTemplate().getForObject(uri, JsonNode.class);
         return list(type, jsonNode);
     }
