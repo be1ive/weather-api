@@ -2,8 +2,8 @@
 Library for retrieving weather data from different services.
 
 Currently supported rest-apis:
-  1. http://openweathermap.org/
-  2. http://forecast.io/#/f/55.7463,37.6601
+  1. http://openweathermap.org
+  2. http://forecast.io
  
 # Download Artifacts
 
